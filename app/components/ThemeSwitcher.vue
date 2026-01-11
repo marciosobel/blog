@@ -9,8 +9,10 @@ const toggleTheme = () => {
 
 <template>
   <button class="theme-switcher" @click="toggleTheme">
-    <LucideSun v-if="colorMode.value == 'dark'" />
-    <LucideMoon v-else-if="colorMode.value == 'light'" />
+    <ClientOnly>
+      <LucideSun v-if="colorMode.value == 'dark'" />
+      <LucideMoon v-else-if="colorMode.value == 'light'" />
+    </ClientOnly>
   </button>
 </template>
 
