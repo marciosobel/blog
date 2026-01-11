@@ -3,7 +3,12 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   ssr: true,
   devtools: { enabled: true },
-  modules: ["@nuxtjs/color-mode", "@nuxt/content", "@nuxtjs/i18n"],
+  modules: [
+    "@nuxtjs/color-mode",
+    "@nuxt/content",
+    "@nuxtjs/i18n",
+    "nuxt-lucide-icons",
+  ],
   css: ["~/assets/css/globals.css"],
   i18n: {
     locales: [

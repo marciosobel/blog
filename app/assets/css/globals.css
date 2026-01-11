@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 :root {
   --color-bg: #f5e8d8;
-  --color-nav: #f5e8d8c5;
+  --color-bg-nav: #f5e8d8c5;
   --color-bg-weak: #ece2d1;
   --color-text: #1c1c1c;
   --color-accent1: #ff4500;
@@ -40,4 +42,43 @@ body {
 
 ul {
   list-style-type: none;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-bg-weak);
+  border: 0;
+  border-radius: var(--round-base);
+  gap: 0.625rem;
+  cursor: pointer;
+}
+
+.underline-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.underline-link:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0.125rem;
+  background-color: var(--color-accent1);
+  border-radius: var(--round-base);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 125ms ease;
+}
+
+
+.underline-link:hover:after,
+.underline-link.active:after {
+  width: 100%;
+  transform: scaleX(1);
+  transform-origin: left;
 }
