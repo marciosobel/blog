@@ -2,7 +2,6 @@
 title: My first blog post
 description: Welcome to my blog!
 date: 2026-01-11
-updated: 12-12-2004
 ---
 Hello, welcome to my blog. I'm still starting, so my writting skills won't be that high lol. Although, I'm happy to finally have my own place to post my silly stuff.
 

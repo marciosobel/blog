@@ -51,14 +51,19 @@ const postUrl = (post: string) => {
         <NuxtLink :to="postUrl(post.stem)" class="underline-link">
           <h2>{{ post.title }}</h2>
         </NuxtLink>
-        <span class="dates">
-          <LucideCalendar class="icon" />
-          {{ formatDate(post.meta.date, locale) }}
-          <template v-if="post.meta.updated">
-            · <LucideClock3 class="icon" />
+        <div class="dates">
+          <span>
+            <LucideCalendar class="icon" />
             {{ formatDate(post.meta.date, locale) }}
-          </template>
-        </span>
+          </span>
+          <span>
+            <template v-if="post.meta.updated">
+              <span class="date-divider">&nbsp;· </span
+              ><LucideClock3 class="icon" />
+              {{ formatDate(post.meta.date, locale) }}
+            </template>
+          </span>
+        </div>
       </div>
       <p>{{ post.description }}</p>
     </li>
@@ -126,7 +131,12 @@ header {
   display: flex;
   align-items: center;
   opacity: 75%;
+  font-size: 0.9rem;
+}
 
+.post .dates span {
+  display: flex;
+  align-items: center;
   gap: 5px;
 }
 
@@ -141,9 +151,22 @@ header {
     max-width: 30ch;
   }
 
+  .post a {
+    margin-bottom: 0.25rem;
+  }
+
   .post .title {
     flex-direction: column;
     gap: 0;
+  }
+
+  .post .dates {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .date-divider {
+    display: none !important;
   }
 }
 </style>

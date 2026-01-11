@@ -10,6 +10,14 @@ export default defineNuxtConfig({
     "nuxt-lucide-icons",
   ],
   css: ["~/assets/css/globals.css"],
+  app: {
+    head: {
+      link: [
+        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+        { rel: "icon", type: "image/png", href: "/favicon.png" },
+      ],
+    },
+  },
   i18n: {
     locales: [
       { code: "en", name: "English", language: "en-US", file: "en.json" },
