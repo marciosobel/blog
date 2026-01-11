@@ -1,13 +1,18 @@
 <script lang="ts" setup>
 import { formatDate } from "#imports";
 const route = useRoute();
-const { locale } = useI18n();
+const { locale, defaultLocale } = useI18n();
 
-const { data: post } = await useAsyncData("post", () => {
-  return queryCollection(`content_${locale.value}`)
-    .path(`/blog/${route.params.slug}/${locale.value}`)
-    .first();
-});
+const { data: post } = await useAsyncData(
+  `${route.params.slug}-${locale.value}`,
+  () => {
+    return queryCollection(`content_${locale.value}`)
+      .path(`/blog/${route.params.slug}/${locale.value}`)
+      .first();
+  },
+);
+
+const href = locale.value === defaultLocale ? "/" : `/${locale.value}`;
 </script>
 
 <template>
@@ -15,7 +20,7 @@ const { data: post } = await useAsyncData("post", () => {
     <template v-if="post">
       <header>
         <div class="header-buttons">
-          <NuxtLink to="/" class="go-back">
+          <NuxtLink :to="href" class="go-back">
             <LucideArrowLeft class="back-icon" />
             <p class="underline-link">{{ $t("all-posts") }}</p>
           </NuxtLink>
