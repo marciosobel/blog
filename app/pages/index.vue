@@ -1,16 +1,12 @@
 <script lang="ts" setup>
+import { formatDate } from "#imports";
+
 const regex = /[^\/]+\/(.+)\/[^\/]+/;
-const { locale, setLocale } = useI18n();
-const colorMode = useColorMode();
+const { locale, locales, setLocale } = useI18n();
 
 const { data: posts } = await useAsyncData(`posts-${locale.value}`, () => {
-  return queryCollection(`content_${locale.value}`).all();
+  return queryCollection(`content_${locale.value}`).order("meta", "DESC").all();
 });
-
-const toggleTheme = () => {
-  const isDark = colorMode.value === "dark";
-  colorMode.preference = isDark ? "light" : "dark";
-};
 
 const toggleLanguage = () => {
   const languages: Array<typeof locale.value> = ["pt", "en"];
@@ -42,13 +38,10 @@ const postUrl = (post: string) => {
     <h1>Blog</h1>
     <div class="header-buttons">
       <button @click="toggleLanguage">
-        {{ locale }}
+        <LucideLanguages :size="14" />{{ $t("locale") }}: {{ locale }}
       </button>
 
-      <button class="theme-switcher" @click="toggleTheme">
-        <LucideSun v-if="colorMode.value == 'dark'" />
-        <LucideMoon v-else-if="colorMode.value == 'light'" />
-      </button>
+      <ThemeSwitcher />
     </div>
   </header>
 
@@ -59,9 +52,11 @@ const postUrl = (post: string) => {
           <h2>{{ post.title }}</h2>
         </NuxtLink>
         <span class="dates">
-          <LucideCalendar class="icon" /> {{ post.meta.date }}
+          <LucideCalendar class="icon" />
+          {{ formatDate(post.meta.date, locale) }}
           <template v-if="post.meta.updated">
-            · <LucideClock3 class="icon" /> {{ post.meta.updated }}
+            · <LucideClock3 class="icon" />
+            {{ formatDate(post.meta.date, locale) }}
           </template>
         </span>
       </div>
@@ -71,6 +66,10 @@ const postUrl = (post: string) => {
 </template>
 
 <style scoped>
+* {
+  margin: 0;
+}
+
 header {
   position: relative;
   display: flex;
@@ -86,7 +85,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
 
   margin-left: auto;
 
@@ -100,6 +99,7 @@ header {
   align-items: center;
   justify-content: start;
 
+  gap: 10px;
   padding: 1rem;
 }
 
@@ -133,32 +133,6 @@ header {
 .post .dates .icon {
   width: 1rem;
   height: 1rem;
-}
-
-.theme-switcher {
-  aspect-ratio: 1 / 1;
-  cursor: pointer;
-
-  padding: 0;
-  border-radius: 100%;
-  background: transparent;
-
-  transition:
-    opacity 125ms ease,
-    transform 125ms ease;
-}
-
-.theme-switcher:hover {
-  transform: scale(1.1);
-}
-
-.theme-switcher:active {
-  transform: scale(1.05);
-}
-
-.theme-switcher > * {
-  width: 2rem;
-  height: 2rem;
 }
 
 @media only screen and (max-width: 768px) {

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 :root {
   --color-bg: #f5e8d8;
@@ -30,14 +31,20 @@
 body {
   background: var(--color-bg);
   overflow-x: hidden;
-}
 
-* {
   color: var(--color-text);
-  margin: 0;
-  padding: 0;
   font-family: Nunito, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   scroll-behavior: smooth;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+pre,
+code {
+  font-family: "JetBrains Mono", monospace;
 }
 
 ul {
@@ -54,6 +61,8 @@ button {
   border-radius: var(--round-base);
   gap: 0.625rem;
   cursor: pointer;
+
+  color: var(--color-text);
 }
 
 .underline-link {

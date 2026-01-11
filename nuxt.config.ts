@@ -12,11 +12,12 @@ export default defineNuxtConfig({
   css: ["~/assets/css/globals.css"],
   i18n: {
     locales: [
-      { code: "en", name: "English", language: "en-US" },
-      { code: "pt", name: "Português", language: "pt-BR" },
+      { code: "en", name: "English", language: "en-US", file: "en.json" },
+      { code: "pt", name: "Português", language: "pt-BR", file: "pt.json" },
     ],
     strategy: "prefix_except_default",
     defaultLocale: "en",
+    baseUrl: "https://blog.marciosobel.dev",
   },
   content: {
     experimental: { sqliteConnector: "native" },
