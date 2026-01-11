@@ -13,6 +13,16 @@ const { data: post } = await useAsyncData(
 );
 
 const href = locale.value === defaultLocale ? "/" : `/${locale.value}`;
+
+useSeoMeta({
+  articleAuthor: ["Márcio Sobel"],
+  author: "Márcio Sobel",
+});
+
+useHead({
+  title: post.value?.title || "",
+  titleTemplate: (s) => `${s || "Márcio Sobel"} - Blog`,
+});
 </script>
 
 <template>

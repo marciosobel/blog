@@ -31,11 +31,21 @@ const postUrl = (post: string) => {
 
   return `/${locale.value}/${name}`;
 };
+
+useSeoMeta({
+  articleAuthor: ["Márcio Sobel"],
+  author: "Márcio Sobel",
+});
+
+useHead({
+  title: "Márcio Sobel",
+  titleTemplate: (s) => `${s} - Blog`,
+});
 </script>
 
 <template>
   <header>
-    <h1>Blog</h1>
+    <h1>Márcio Sobel - Blog</h1>
     <div class="header-buttons">
       <button @click="toggleLanguage">
         <LucideLanguages :size="14" />{{ $t("locale") }}: {{ locale }}
