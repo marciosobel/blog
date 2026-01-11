@@ -45,7 +45,6 @@ useHead({
 
 <template>
   <header>
-    <h1>Márcio Sobel - Blog</h1>
     <div class="header-buttons">
       <button @click="toggleLanguage">
         <LucideLanguages :size="14" />{{ $t("locale") }}: {{ locale }}
@@ -53,6 +52,7 @@ useHead({
 
       <ThemeSwitcher />
     </div>
+    <h1>Márcio Sobel - Blog</h1>
   </header>
 
   <ul class="posts">
@@ -90,13 +90,16 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   margin: 1rem;
 }
 
+header h1 {
+  text-align: center;
+}
+
 .header-buttons {
-  position: absolute;
-  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
