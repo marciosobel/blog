@@ -1,0 +1,43 @@
+:root {
+  --color-bg: #f5e8d8;
+  --color-nav: #f5e8d8c5;
+  --color-bg-weak: #ece2d1;
+  --color-text: #1c1c1c;
+  --color-accent1: #ff4500;
+  --color-accent2: #daa520;
+  --color-hover: #ff6f61;
+  --round-base: 5px;
+}
+
+:root.dark {
+  --color-bg: #1c1c1c;
+  --color-bg-nav: #1c1c1cc5;
+  --color-bg-weak: #262626;
+  --color-text: #f5e8d8;
+  --color-accent1: #ff6f61;
+  --color-accent2: #daa520;
+  --color-hover: #ff4500;
+}
+
+::selection,
+::-moz-selection {
+  background: var(--color-accent1);
+  color: var(--color-bg);
+}
+
+body {
+  background: var(--color-bg);
+  overflow-x: hidden;
+}
+
+* {
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+  font-family: Nunito, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+}
+
+ul {
+  list-style-type: none;
+}
