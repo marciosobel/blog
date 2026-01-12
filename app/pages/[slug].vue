@@ -20,8 +20,8 @@ useSeoMeta({
 });
 
 useHead({
-  title: post.value?.title || "",
-  titleTemplate: (s) => `${s || "Márcio Sobel"} - Blog`,
+  title: post.value?.title,
+  titleTemplate: (s) => `${s || "Blog"} - Márcio Sobel`,
 });
 </script>
 

@@ -38,8 +38,7 @@ useSeoMeta({
 });
 
 useHead({
-  title: "Márcio Sobel",
-  titleTemplate: (s) => `${s} - Blog`,
+  title: "Blog - Márcio Sobel",
 });
 </script>
 
