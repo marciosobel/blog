@@ -18,6 +18,11 @@ export default defineNuxtConfig({
       ],
     },
   },
+  nitro: {
+    prerender: {
+      routes: ["/feed", "/pt/feed"],
+    },
+  },
   i18n: {
     locales: [
       { code: "en", name: "English", language: "en-US", file: "en.json" },

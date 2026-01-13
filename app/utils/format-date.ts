@@ -6,7 +6,7 @@ const localeMap = {
   pt: ptBR,
 };
 
-export function formatDate(
+export default function (
   str: unknown,
   currentLocale: string = "en",
 ): string | undefined {

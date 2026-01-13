@@ -16,10 +16,13 @@
     "date-fns": "^4.1.0",
     "nuxt": "^4.2.2",
     "nuxt-lucide-icons": "2.0.0",
+    "rss": "^1.2.2",
+    "snarkdown": "^2.0.0",
     "vue": "^3.5.26",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@types/rss": "^0.0.32",
     "@vue/language-server": "^3.2.2",
     "eslint": "^9.39.2",
     "eslint-plugin-vue": "^10.6.2",

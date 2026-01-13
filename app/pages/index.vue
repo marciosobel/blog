@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import { formatDate } from "#imports";
-
-const regex = /[^\/]+\/(.+)\/[^\/]+/;
 const { locale, locales, setLocale } = useI18n();
 
 const { data: posts } = await useAsyncData(`posts-${locale.value}`, () => {
@@ -21,15 +18,6 @@ const toggleLanguage = () => {
   }
 
   setLocale(language);
-};
-
-const postUrl = (post: string) => {
-  const name = post.match(regex)?.[1];
-  if (locale.value == "en") {
-    return `/${name}`;
-  }
-
-  return `/${locale.value}/${name}`;
 };
 
 useSeoMeta({
@@ -57,7 +45,10 @@ useHead({
   <ul class="posts">
     <li class="post" v-for="post in posts">
       <div class="title">
-        <NuxtLink :to="postUrl(post.stem)" class="underline-link">
+        <NuxtLink
+          :to="generatePostUrl(post.stem, locale)"
+          class="underline-link"
+        >
           <h2>{{ post.title }}</h2>
         </NuxtLink>
         <div class="dates">
