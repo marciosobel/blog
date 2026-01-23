@@ -17,7 +17,7 @@ const ICON_SIZE = 20;
       </button>
     </NuxtLink>
 
-    <NuxtLink :to="locale === defaultLocale ? '/feed' : `${locale}/feed`">
+    <NuxtLink to="/feed">
       <button class="link">
         <LucideRss :size="ICON_SIZE" />
       </button>
