@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 const { locale, defaultLocale } = useI18n();
+const rssLink = computed(() =>
+  locale.value === defaultLocale ? "/feed" : `/${locale.value}/feed`,
+);
 const ICON_SIZE = 20;
 </script>
 
@@ -17,7 +20,7 @@ const ICON_SIZE = 20;
       </button>
     </NuxtLink>
 
-    <NuxtLink to="/feed">
+    <NuxtLink :to="rssLink">
       <button class="link">
         <LucideRss :size="ICON_SIZE" />
       </button>
