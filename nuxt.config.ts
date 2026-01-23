@@ -38,7 +38,7 @@ export default defineNuxtConfig({
       pathMeta: { slugifyOptions: { trim: true } },
       markdown: {
         highlight: {
-          langs: [],
+          langs: ["rust"],
           theme: {
             default: "gruvbox-light-soft",
             dark: "gruvbox-dark-soft",
