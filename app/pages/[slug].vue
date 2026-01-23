@@ -11,17 +11,46 @@ const { data: post } = await useAsyncData(
       .first();
   },
 );
+const title = post.value?.title;
+const description = post.value?.description;
+const date = post.value?.meta.date as string | undefined;
+const updated = post.value?.meta.updated as string | undefined;
 
 const href = locale.value === defaultLocale ? "/" : `/${locale.value}`;
 
 useSeoMeta({
+  title,
+  titleTemplate: (s) => `${s || "Blog"} - Márcio Sobel`,
+  description: description,
+
+  // Open Graph (Facebook/LinkedIn)
+  ogTitle: title,
+  ogDescription: description,
+  ogType: "article",
+  ogUrl: `https://blog.marciosobel.dev${route.path}`,
+  ogImage: "https://blog.marciosobel.dev/rss_icon.png",
+
+  // Twitter
+  twitterCard: "summary_large_image",
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: "https://blog.marciosobel.dev/rss_icon.png",
+
+  // Article Specifics
   articleAuthor: ["Márcio Sobel"],
   author: "Márcio Sobel",
+  articlePublishedTime: date,
+  articleModifiedTime: updated,
 });
 
 useHead({
-  title: post.value?.title,
-  titleTemplate: (s) => `${s || "Blog"} - Márcio Sobel`,
+  htmlAttrs: { lang: locale.value },
+  link: [
+    {
+      rel: "canonical",
+      href: `https://blog.marciosobel.dev${route.path}`,
+    },
+  ],
 });
 </script>
 
@@ -62,6 +91,8 @@ useHead({
       >
     </template>
   </main>
+
+  <Footer />
 </template>
 
 <style scoped>
@@ -143,6 +174,35 @@ main {
   line-height: 1.2;
 }
 
+:deep(blockquote) {
+  position: relative;
+}
+
+:deep(blockquote p) {
+  opacity: 75%;
+}
+
+:deep(blockquote::after) {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 4px;
+  left: -20px;
+  top: 0;
+  background: var(--color-text);
+  opacity: 15%;
+  border-radius: var(--round-base);
+}
+
+:deep(code) {
+  background: var(--color-bg-weak);
+  padding-inline: 6px;
+  border-radius: var(--round-base);
+}
+
+:deep(pre code) {
+  padding-block: 10px;
+}
 @media only screen and (max-width: 768px) {
   .metadata {
     display: flex;
