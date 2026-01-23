@@ -200,8 +200,14 @@ main {
   border-radius: var(--round-base);
 }
 
+:deep(pre) {
+  background: var(--color-bg-weak);
+  padding: 10px;
+  border-radius: var(--round-base);
+}
+
 :deep(pre code) {
-  padding-block: 10px;
+  padding: 0;
 }
 @media only screen and (max-width: 768px) {
   .metadata {
