@@ -103,7 +103,7 @@ useHead({
 }
 
 .title {
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,18 +198,24 @@ main {
   background: var(--color-bg-weak);
   padding-inline: 6px;
   border-radius: var(--round-base);
+  font-size: 0.975rem;
 }
 
 :deep(pre) {
   background: var(--color-bg-weak);
   padding: 10px;
   border-radius: var(--round-base);
+  overflow-x: scroll;
 }
 
 :deep(pre code) {
   padding: 0;
 }
 @media only screen and (max-width: 768px) {
+  main {
+    max-width: 90dvw;
+  }
+
   .metadata {
     display: flex;
     align-items: center;

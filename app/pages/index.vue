@@ -187,6 +187,7 @@ header h1 {
   }
 
   .post .title {
+    text-align: center;
     flex-direction: column;
     gap: 0;
   }
@@ -198,6 +199,11 @@ header h1 {
 
   .date-divider {
     display: none !important;
+  }
+
+  .header-buttons {
+    margin-right: auto;
+    margin-bottom: 14px;
   }
 }
 </style>
