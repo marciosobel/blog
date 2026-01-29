@@ -2,7 +2,7 @@
 title: Rust é a MELHOR linguagem de programação
 description: E eu posso provar.
 date: 2026-01-19
-updated:
+updated: 2026-01-29
 ---
 Você já deve estar farto de ouvir que "Rust é seguro", "Rust é a linguagem de programação mais amada do mundo", "Rust é o futuro".
 
@@ -28,9 +28,9 @@ Aqui vai um exemplo de um `match` no Rust:
 let value = 5;
 match value {
     0..=10 => println!("Número entre 0 e 10!"),
-    11 | 13 | 17 | 19 => println!("Número primo!");
-    n if n % 2 == 0 => println!("Número par!");
-    n => println!("Não sei o que fazer com o número {n}");
+    11 | 13 | 17 | 19 => println!("Número primo!"),
+    n if n % 2 == 0 => println!("Número par!"),
+    n => println!("Não sei o que fazer com o número {n}"),
 }
 ```
 Também é possível fazer *pattern matching* em um `if`. Utilizando o exemplo anterior de `DownloadStatus`:
@@ -40,12 +40,12 @@ if let DownloadStatus::Error(error) = status {
     eprintln!("Erro no download: {}", error);
 }
 ```
-Pode parecer apenas um *boilerplate* mas os `enum`s com esses `pattern matching`s tornam o código mais robusto e seguro!
+Pode parecer apenas um *boilerplate* mas os `enum`s com esses `pattern matching`s tornam o código mais robusto e seguro conforme a codebase cresce!
 ## Mutabilidade explícita
 Outro ponto muito positivo do Rust é a sua mutabilidade explícita. Tudo é imutável por padrão:
 ```rust
 let x = 10;
-x = x * 2; // O código falha aqui!
+x = x * 2; // O código falha aqui
 ```
 O código falha pois `x` é imutável. Para deixá-la mutável, temos que adicionar a keyword `mut`:
 ```rust
@@ -62,9 +62,9 @@ Fica claro se uma função vai alterar uma variável ou não. Em C ou Go, passar
 ## Macros!
 É possível fazer *metaprogramming* no Rust — ou seja, um código que escreve código Rust. Macros em Rust são praticamente uma linguagem nova, mas as crates [`syn`](https://crates.io/crates/syn) e [`quote`](https://crates.io/crates/quote) deixam o processo mais intuitivo e fluido, recomendo muito ver [esse vídeo](https://youtu.be/SMCRQj9Hbx8) para entender melhor. Não vou me aprofundar muito em macros aqui, daria pra fazer um post inteiro só sobre eles (quem sabe um dia).
 ## Configuração em TOML
-Admito, eu *amo* `TOML`. Infinitamente mais do que `YAML`, e com certeza mais que `JSON`. É uma linguagem clara, mínima e você consegue ler toda a [spec](https://toml.io/en/v1.1.0) em uns 15 minutos. Rust usa TOML para definir versão, dependências, features, configuração do formatter, é ótimo!
+Admito, eu *amo* `TOML`. Mais do que `YAML`, e infinitamente mais que `JSON`. É uma linguagem clara, mínima e você consegue ler toda a [spec](https://toml.io/en/v1.1.0) em uns 15 minutos. Rust usa TOML para definir versão, dependências, features, configuração do formatter... É ótimo!
 ## Nem tudo são flores
-Claro, Rust não é perfeito. Principalmente no início, onde você tem que lutar contra seus fundamentos para programar em Rust. Ele possui vários problemas na DX, como verbosidade, compile-time longo (mesmo em debug), e nem me deixe encostar em lifetimes.
+Claro, Rust não é perfeito. Principalmente no início, onde você tem que lutar contra seus fundamentos para programar em Rust. Ele possui vários problemas na DX, como verbosidade, compile-time longo (mesmo em debug), e nem me deixe encostar em lifetimes. Talvez eu faça uma versão maligna desse post só falando do lado ruim de Rust.
 ## Conclusão
 O Rust possui ótimos fundamentos, um sistema de macro maravilhoso e o `cargo` é sensacional. Com certeza é uma linguagem moderna, robusta, rápida e segura. Ganhar por vários anos consecutivos o título da linguagem mais amada do mundo não é surpresa. Espero que eu tenha conseguido cobrir alguns dos pontos da linguagem que mais gosto com clareza, além dos pontos óbvios de muitos outros posts da internet (a segurança, ser *blazingly fast*, etc.)
 
