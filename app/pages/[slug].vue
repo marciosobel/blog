@@ -69,13 +69,13 @@ useHead({
         <div class="title">
           <h1>{{ post.title }}</h1>
           <aside class="metadata">
-            <span
-              ><LucideCalendar class="icon" />{{ $t("created-in") }}
+            <span>
+              <LucideCalendar class="icon" />{{ $t("created-in") }}
               {{ formatDate(post.meta.date, locale) }}</span
             >
             <span v-if="post.meta.updated">
-              <span class="date-divider" aria-hidden>&nbsp; · </span
-              ><LucideClock3 class="icon" />{{ $t("last-updated") }}
+              <span class="date-divider" aria-hidden>&nbsp; · </span>
+              <LucideClock3 class="icon" />{{ $t("last-updated") }}
               {{ formatDate(post.meta.updated, locale) }}
             </span>
           </aside>
@@ -133,7 +133,6 @@ useHead({
 
 span .icon {
   width: 0.75rem;
-  transform: translateY(-2px);
 }
 
 header .go-back {
