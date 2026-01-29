@@ -28,13 +28,13 @@ useSeoMeta({
   ogDescription: description,
   ogType: "article",
   ogUrl: `https://blog.marciosobel.dev${route.path}`,
-  ogImage: "https://blog.marciosobel.dev/rss_icon.png",
+  ogImage: "https://blog.marciosobel.dev/og_image.png",
 
   // Twitter
   twitterCard: "summary_large_image",
   twitterTitle: title,
   twitterDescription: description,
-  twitterImage: "https://blog.marciosobel.dev/rss_icon.png",
+  twitterImage: "https://blog.marciosobel.dev/og_image.png",
 
   // Article Specifics
   articleAuthor: ["Márcio Sobel"],
