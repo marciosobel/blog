@@ -2,5 +2,8 @@
   "all-posts": "All posts",
   "created-in": "Created in",
   "last-updated": "Last updated in",
-  "locale": "Locale"
+  "locale": "Locale",
+  "post-not-found": "Post not found",
+  "not-found-message": "The post you are looking for does not exist or has been removed.",
+  "back-to-homepage": "Back to homepage"
 }

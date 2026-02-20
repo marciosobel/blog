@@ -44,12 +44,21 @@ const { data: post } = await useAsyncData(
     },
   },
 );
-const title = () => post.value?.title;
-const description = () => post.value?.description;
-const createdISO = () => post.value?.createdAt.iso;
-const updatedISO = () => post.value?.updatedAt.iso;
-const createdFormatted = () => post.value?.createdAt.formatted;
-const updatedFormatted = () => post.value?.updatedAt.formatted;
+
+if (!post.value) {
+  throw createError({
+    status: 404,
+    statusText: "Post not found",
+    fatal: true,
+  });
+}
+
+const title = () => post.value!.title;
+const description = () => post.value!.description;
+const createdISO = () => post.value!.createdAt.iso;
+const updatedISO = () => post.value!.updatedAt.iso;
+const createdFormatted = () => post.value!.createdAt.formatted;
+const updatedFormatted = () => post.value!.updatedAt.formatted;
 
 const href = locale.value === defaultLocale ? "/" : `/${locale.value}`;
 
@@ -90,59 +99,34 @@ useHead({
 </script>
 
 <template>
-  <template v-if="post">
-    <header>
-      <div class="header-buttons">
-        <NuxtLink :to="href" class="go-back">
-          <LucideArrowLeft class="back-icon" />
-          <p class="underline-link">{{ $t("all-posts") }}</p>
-        </NuxtLink>
-        <ThemeSwitcher />
-      </div>
+  <header>
+    <div class="header-buttons">
+      <NuxtLink :to="href" class="go-back">
+        <LucideArrowLeft class="back-icon" />
+        <p class="underline-link">{{ $t("all-posts") }}</p>
+      </NuxtLink>
+      <ThemeSwitcher />
+    </div>
 
-      <div class="title">
-        <h1>{{ post.title }}</h1>
-        <aside class="metadata">
-          <span>
-            <LucideCalendar class="icon" />{{ $t("created-in") }}
-            {{ post.createdAt.formatted }}</span
-          >
-          <span v-if="post.updatedAt.formatted">
-            <span class="date-divider" aria-hidden>&nbsp; · </span>
-            <LucideClock3 class="icon" />{{ $t("last-updated") }}
-            {{ post.updatedAt.formatted }}
-          </span>
-        </aside>
-      </div>
-    </header>
+    <div class="title">
+      <h1>{{ post!.title }}</h1>
+      <aside class="metadata">
+        <span>
+          <LucideCalendar class="icon" />{{ $t("created-in") }}
+          {{ post!.createdAt.formatted }}</span
+        >
+        <span v-if="post!.updatedAt.formatted">
+          <span class="date-divider" aria-hidden>&nbsp; · </span>
+          <LucideClock3 class="icon" />{{ $t("last-updated") }}
+          {{ post!.updatedAt.formatted }}
+        </span>
+      </aside>
+    </div>
+  </header>
 
-    <main>
-      <ContentRenderer :value="post" tag="article" class="content" />
-    </main>
-  </template>
-
-  <template v-else>
-    <header>
-      <div class="header-buttons">
-        <NuxtLink :to="href" class="go-back">
-          <LucideArrowLeft class="back-icon" />
-          <p class="underline-link">{{ $t("all-posts") }}</p>
-        </NuxtLink>
-        <ThemeSwitcher />
-      </div>
-
-      <div class="title">
-        <h1>Márcio Sobel - Blog</h1>
-      </div>
-    </header>
-
-    <main class="not-found">
-      <p style="margin-top: 2rem; margin-bottom: 0.5rem">Post not found.</p>
-      <NuxtLink to="/" class="underline-link"
-        ><b>Go to post listing</b></NuxtLink
-      >
-    </main>
-  </template>
+  <main>
+    <ContentRenderer :value="post!" tag="article" class="content" />
+  </main>
 
   <Footer />
 </template>

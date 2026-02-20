@@ -6,21 +6,6 @@ const { data: posts } = await useAsyncData(`posts-${locale.value}`, () => {
   return queryCollection(`content_${locale.value}`).order("meta", "DESC").all();
 });
 
-const toggleLanguage = () => {
-  const languages: Array<typeof locale.value> = ["pt", "en"];
-  const currentIndex = languages.indexOf(locale.value);
-  if (currentIndex === -1) {
-    return;
-  }
-
-  const language = languages[(currentIndex + 1) % languages.length];
-  if (!language) {
-    return;
-  }
-
-  setLocale(language);
-};
-
 const title = "Márcio Sobel";
 const description =
   "A silly developer who loves cats, art and coding on free time.";
@@ -59,10 +44,7 @@ useHead({
     <h1>Márcio Sobel - Blog</h1>
 
     <div class="header-buttons">
-      <button style="text-wrap: nowrap" @click="toggleLanguage">
-        <LucideLanguages :size="14" />{{ $t("locale") }}: {{ locale }}
-      </button>
-
+      <LocaleButton />
       <ThemeSwitcher />
     </div>
   </header>

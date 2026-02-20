@@ -2,5 +2,8 @@
   "all-posts": "Todos os posts",
   "created-in": "Criado em",
   "last-updated": "Última atualização em",
-  "locale": "Idioma"
+  "locale": "Idioma",
+  "post-not-found": "Post não encontrado",
+  "not-found-message": "O post que você está procurando não existe ou foi removido.",
+  "back-to-homepage": "Voltar para a página inicial"
 }
