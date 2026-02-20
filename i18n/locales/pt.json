@@ -5,5 +5,6 @@
   "locale": "Idioma",
   "post-not-found": "Post não encontrado",
   "not-found-message": "O post que você está procurando não existe ou foi removido.",
-  "back-to-homepage": "Voltar para a página inicial"
+  "back-to-homepage": "Voltar para a página inicial",
+  "search-posts-placeholder": "Pesquisar posts..."
 }

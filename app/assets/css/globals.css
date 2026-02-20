@@ -11,6 +11,7 @@
   --color-accent2: #daa520;
   --color-hover: #ff6f61;
   --round-base: 5px;
+  --main-font: Nunito, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 :root.dark {
@@ -39,7 +40,7 @@
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: Nunito, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--main-font);
   scroll-behavior: smooth;
 
   margin: 0;
@@ -47,8 +48,8 @@ body {
 
 #__nuxt {
   min-height: 100dvh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -77,6 +78,7 @@ button {
   cursor: pointer;
 
   color: var(--color-text);
+  font-family: var(--main-font);
 }
 
 .underline-link {
@@ -103,4 +105,17 @@ button {
   width: 100%;
   transform: scaleX(1);
   transform-origin: left;
+}
+
+input {
+  background: var(--color-bg-weak);
+  color: var(--color-text);
+  border: 2px var(--border) solid;
+  border-radius: var(--round-base);
+  padding: 0.5rem 0.625rem;
+  font-family: var(--main-font);
+}
+
+input:focus {
+  outline: 2px solid var(--color-accent1);
 }

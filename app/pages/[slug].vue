@@ -206,14 +206,11 @@ main {
   line-height: 1.45;
   font-size: 1.125rem;
   overflow-wrap: break-word;
+  flex-grow: 1;
 }
 
 header {
   margin: 2rem 1.5rem;
-}
-
-:deep(article > * + *) {
-  margin-top: 1.25em;
 }
 
 :deep(h1),

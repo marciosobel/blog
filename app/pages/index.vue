@@ -2,9 +2,14 @@
 const { locale, setLocale } = useI18n();
 const route = useRoute();
 
-const { data: posts } = await useAsyncData(`posts-${locale.value}`, () => {
-  return queryCollection(`content_${locale.value}`).order("meta", "DESC").all();
-});
+const { data: posts, pending } = await useAsyncData(
+  `posts-${locale.value}`,
+  () => {
+    return queryCollection(`content_${locale.value}`)
+      .order("meta", "DESC")
+      .all();
+  },
+);
 
 const title = "Márcio Sobel";
 const description =
@@ -37,9 +42,21 @@ useHead({
     },
   ],
 });
+
+const search = ref("");
+const results = computed(() => {
+  if (!search.value || !posts.value) return posts.value;
+
+  const searchTerm = search.value.toLowerCase();
+  return posts.value.filter(
+    (post) =>
+      post.title.toLowerCase().includes(searchTerm) ||
+      post.description.toLowerCase().includes(searchTerm),
+  );
+});
 </script>
 
-<template>
+<template v-if="!pending">
   <header>
     <h1>Márcio Sobel - Blog</h1>
 
@@ -50,8 +67,13 @@ useHead({
   </header>
 
   <main>
+    <div class="search-bar">
+      <input :placeholder="$t('search-posts-placeholder')" v-model="search" />
+      <LucideSearch />
+    </div>
+
     <ul class="posts">
-      <li class="post" v-for="post in posts">
+      <li class="post" v-for="post in results">
         <div class="title">
           <NuxtLink
             :to="generatePostUrl(post.stem, locale)"
@@ -91,7 +113,9 @@ header {
   grid-template-columns: 1fr auto 1fr;
   gap: 10px;
   align-items: center;
-  margin: 2rem 1.5rem;
+  margin-inline: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 header h1 {
@@ -108,6 +132,10 @@ header h1 {
 
   width: fit-content;
   height: fit-content;
+}
+
+main {
+  flex-grow: 1;
 }
 
 .posts {
@@ -158,6 +186,33 @@ header h1 {
 .post .dates .icon {
   width: 1rem;
   height: 1rem;
+}
+
+.search-bar {
+  position: relative;
+  width: min(100dvw, 50ch);
+  margin-bottom: 1rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.search-bar input {
+  width: 100%;
+  font-size: 1rem;
+  padding-left: 2.75rem;
+}
+
+.lucide-search-icon {
+  position: absolute;
+  width: 2rem;
+  aspect-ratio: 1 / 1;
+
+  top: 50%;
+  left: 1.5rem;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: var(--color-text);
+  opacity: 0.5;
 }
 
 @media only screen and (max-width: 560px) {
