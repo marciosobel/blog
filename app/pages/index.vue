@@ -142,7 +142,7 @@ header h1 {
 .post {
   background: var(--color-bg-weak);
   border-radius: var(--round-base);
-  border: 2px #ffffff10 solid;
+  border: 2px var(--border) solid;
   width: min(120ch, 90dvw);
   padding: 1rem;
 }

@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 :root {
   --color-bg: #f5e8d8;
   --color-bg-nav: #f5e8d8c5;
-  --color-bg-weak: #ece2d1;
+  --color-bg-weak: #f2e1d0;
   --color-text: #1c1c1c;
+  --border: #1c1c1c09;
   --color-accent1: #ff4500;
   --color-accent2: #daa520;
   --color-hover: #ff6f61;
@@ -15,6 +16,7 @@
 :root.dark {
   --color-bg: #1c1c1c;
   --color-bg-nav: #1c1c1cc5;
+  --border: #ffffff0c;
   --color-bg-weak: #262626;
   --color-text: #f5e8d8;
   --color-accent1: #ff6f61;
@@ -79,7 +81,7 @@ button {
 }
 
 .underline-link:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -91,7 +93,6 @@ button {
   transform-origin: right;
   transition: transform 125ms ease;
 }
-
 
 .underline-link:hover:after,
 .underline-link.active:after {
