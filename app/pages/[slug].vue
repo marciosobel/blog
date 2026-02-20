@@ -55,47 +55,68 @@ useHead({
 </script>
 
 <template>
-  <main>
-    <template v-if="post">
-      <header>
-        <div class="header-buttons">
-          <NuxtLink :to="href" class="go-back">
-            <LucideArrowLeft class="back-icon" />
-            <p class="underline-link">{{ $t("all-posts") }}</p>
-          </NuxtLink>
-          <ThemeSwitcher />
-        </div>
+  <template v-if="post">
+    <header>
+      <div class="header-buttons">
+        <NuxtLink :to="href" class="go-back">
+          <LucideArrowLeft class="back-icon" />
+          <p class="underline-link">{{ $t("all-posts") }}</p>
+        </NuxtLink>
+        <ThemeSwitcher />
+      </div>
 
-        <div class="title">
-          <h1>{{ post.title }}</h1>
-          <aside class="metadata">
-            <span>
-              <LucideCalendar class="icon" />{{ $t("created-in") }}
-              {{ formatDate(post.meta.date, locale) }}</span
-            >
-            <span v-if="post.meta.updated">
-              <span class="date-divider" aria-hidden>&nbsp; · </span>
-              <LucideClock3 class="icon" />{{ $t("last-updated") }}
-              {{ formatDate(post.meta.updated, locale) }}
-            </span>
-          </aside>
-        </div>
-      </header>
+      <div class="title">
+        <h1>{{ post.title }}</h1>
+        <aside class="metadata">
+          <span>
+            <LucideCalendar class="icon" />{{ $t("created-in") }}
+            {{ formatDate(post.meta.date, locale) }}</span
+          >
+          <span v-if="post.meta.updated">
+            <span class="date-divider" aria-hidden>&nbsp; · </span>
+            <LucideClock3 class="icon" />{{ $t("last-updated") }}
+            {{ formatDate(post.meta.updated, locale) }}
+          </span>
+        </aside>
+      </div>
+    </header>
 
+    <main>
       <ContentRenderer :value="post" tag="article" class="content" />
-    </template>
-    <template v-else>
+    </main>
+  </template>
+  <template v-else>
+    <header>
+      <div class="header-buttons">
+        <NuxtLink :to="href" class="go-back">
+          <LucideArrowLeft class="back-icon" />
+          <p class="underline-link">{{ $t("all-posts") }}</p>
+        </NuxtLink>
+        <ThemeSwitcher />
+      </div>
+
+      <div class="title">
+        <h1>Márcio Sobel - Blog</h1>
+      </div>
+    </header>
+
+    <main class="not-found">
       <p style="margin-top: 2rem; margin-bottom: 0.5rem">Post not found.</p>
       <NuxtLink to="/" class="underline-link"
         ><b>Go to post listing</b></NuxtLink
       >
-    </template>
-  </main>
+    </main>
+  </template>
 
   <Footer />
 </template>
 
 <style scoped>
+.not-found {
+  text-align: center;
+  margin: auto;
+}
+
 .header-buttons {
   display: flex;
   align-items: center;
@@ -158,10 +179,15 @@ header .go-back {
 }
 
 main {
-  margin: 40px auto;
+  padding-inline: 30px;
+  margin-inline: auto;
   max-width: 80ch;
   line-height: 1.4;
   font-size: 1.125rem;
+}
+
+header {
+  margin: 20px;
 }
 
 :deep(h1),
@@ -210,9 +236,11 @@ main {
 :deep(pre code) {
   padding: 0;
 }
-@media only screen and (max-width: 768px) {
+
+@media only screen and (max-width: 800px) {
   main {
     max-width: 90dvw;
+    padding: 0;
   }
 
   .metadata {

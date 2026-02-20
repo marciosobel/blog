@@ -56,14 +56,15 @@ useHead({
 
 <template>
   <header>
+    <h1>Márcio Sobel - Blog</h1>
+
     <div class="header-buttons">
-      <button @click="toggleLanguage">
+      <button style="text-wrap: nowrap" @click="toggleLanguage">
         <LucideLanguages :size="14" />{{ $t("locale") }}: {{ locale }}
       </button>
 
       <ThemeSwitcher />
     </div>
-    <h1>Márcio Sobel - Blog</h1>
   </header>
 
   <main>
@@ -104,26 +105,24 @@ useHead({
 }
 
 header {
-  position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  margin: 1rem;
+  margin: 10px;
 }
 
 header h1 {
+  grid-column-start: 2;
   text-align: center;
 }
 
 .header-buttons {
+  justify-self: end;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
-
-  margin-left: auto;
 
   width: fit-content;
   height: fit-content;
@@ -136,7 +135,7 @@ header h1 {
   justify-content: start;
 
   gap: 10px;
-  padding: 1rem;
+  padding: 0rem;
 }
 
 .post {
@@ -156,6 +155,7 @@ header h1 {
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .post .dates {
@@ -176,34 +176,32 @@ header h1 {
   height: 1rem;
 }
 
-@media only screen and (max-width: 768px) {
-  .post {
-    margin-left: 0;
-    max-width: 30ch;
+@media only screen and (max-width: 560px) {
+  header {
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
   }
 
-  .post a {
-    margin-bottom: 0.25rem;
+  header h1 {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    text-align: center;
+  }
+
+  .header-buttons {
+    grid-row-start: 1;
+    margin-inline: auto;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .post .title {
     text-align: center;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .post .dates {
-    flex-direction: column;
     justify-content: center;
   }
 
-  .date-divider {
-    display: none !important;
-  }
-
-  .header-buttons {
-    margin-right: auto;
-    margin-bottom: 14px;
+  .post .dates {
+    justify-content: space-between;
   }
 }
 </style>

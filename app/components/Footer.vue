@@ -3,6 +3,8 @@ const { locale, defaultLocale } = useI18n();
 const rssLink = computed(() =>
   locale.value === defaultLocale ? "/feed" : `/${locale.value}/feed`,
 );
+
+const year = new Date().getFullYear();
 const ICON_SIZE = 20;
 </script>
 
@@ -34,8 +36,7 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: auto;
-  padding-bottom: 10px;
+  padding-block: 10px;
 }
 
 .link {
