@@ -10,11 +10,46 @@ const { data: post } = await useAsyncData(
       .path(`/blog/${route.params.slug}/${locale.value}`)
       .first();
   },
+  {
+    watch: [locale],
+    transform: (data) => {
+      if (!data) return data;
+      const dates: Record<
+        "createdAt" | "updatedAt",
+        Record<"iso" | "formatted", string | undefined>
+      > = {
+        createdAt: {
+          iso: undefined,
+          formatted: undefined,
+        },
+        updatedAt: {
+          iso: undefined,
+          formatted: undefined,
+        },
+      };
+
+      dates.createdAt.iso = new Date(data.meta.date as string).toISOString();
+      dates.createdAt.formatted = formatDate(data.meta.date, locale.value);
+
+      if (data.meta.updated) {
+        const updatedDate = new Date(data.meta.updated as string);
+        dates.updatedAt.iso = updatedDate.toISOString();
+        dates.updatedAt.formatted = formatDate(data.meta.updated, locale.value);
+      }
+
+      return {
+        ...data,
+        ...dates,
+      };
+    },
+  },
 );
-const title = post.value?.title;
-const description = post.value?.description;
-const date = post.value?.meta.date as string | undefined;
-const updated = post.value?.meta.updated as string | undefined;
+const title = () => post.value?.title;
+const description = () => post.value?.description;
+const createdISO = () => post.value?.createdAt.iso;
+const updatedISO = () => post.value?.updatedAt.iso;
+const createdFormatted = () => post.value?.createdAt.formatted;
+const updatedFormatted = () => post.value?.updatedAt.formatted;
 
 const href = locale.value === defaultLocale ? "/" : `/${locale.value}`;
 
@@ -39,8 +74,8 @@ useSeoMeta({
   // Article Specifics
   articleAuthor: ["Márcio Sobel"],
   author: "Márcio Sobel",
-  articlePublishedTime: date,
-  articleModifiedTime: updated,
+  articlePublishedTime: createdISO,
+  articleModifiedTime: updatedISO,
 });
 
 useHead({
@@ -70,12 +105,12 @@ useHead({
         <aside class="metadata">
           <span>
             <LucideCalendar class="icon" />{{ $t("created-in") }}
-            {{ formatDate(post.meta.date, locale) }}</span
+            {{ post.createdAt.formatted }}</span
           >
-          <span v-if="post.meta.updated">
+          <span v-if="post.updatedAt.formatted">
             <span class="date-divider" aria-hidden>&nbsp; · </span>
             <LucideClock3 class="icon" />{{ $t("last-updated") }}
-            {{ formatDate(post.meta.updated, locale) }}
+            {{ post.updatedAt.formatted }}
           </span>
         </aside>
       </div>
@@ -85,6 +120,7 @@ useHead({
       <ContentRenderer :value="post" tag="article" class="content" />
     </main>
   </template>
+
   <template v-else>
     <header>
       <div class="header-buttons">
@@ -134,6 +170,7 @@ useHead({
 .title h1 {
   margin: 0;
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 .metadata {
@@ -181,13 +218,18 @@ header .go-back {
 main {
   padding-inline: 30px;
   margin-inline: auto;
-  max-width: 80ch;
-  line-height: 1.4;
+  max-width: 75ch;
+  line-height: 1.45;
   font-size: 1.125rem;
+  overflow-wrap: break-word;
 }
 
 header {
-  margin: 20px;
+  margin: 2rem 1.5rem;
+}
+
+:deep(article > * + *) {
+  margin-top: 1.25em;
 }
 
 :deep(h1),
@@ -230,7 +272,8 @@ header {
   background: var(--color-bg-weak);
   padding: 10px;
   border-radius: var(--round-base);
-  overflow-x: scroll;
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 
 :deep(pre code) {
@@ -241,6 +284,7 @@ header {
   main {
     max-width: 90dvw;
     padding: 0;
+    font-size: 1.05rem;
   }
 
   .metadata {

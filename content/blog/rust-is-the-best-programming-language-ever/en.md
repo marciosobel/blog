@@ -37,7 +37,7 @@ It’s also possible to do _pattern matching_ in an `if`. Using the previous `Do
 ```rust
 let status = DownloadStatus::Error("Failed to download".into());
 if let DownloadStatus::Error(error) = status {
-    eprintln!("Erro no download: {}", error);
+    eprintln!("Download error: {}", error);
 }
 ```
 It may look like just more _boilerplate_, but `enum`s combined with this kind of _pattern matching_ make the code much more robust and safe as the codebase grows!

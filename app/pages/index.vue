@@ -109,7 +109,7 @@ header {
   grid-template-columns: 1fr auto 1fr;
   gap: 10px;
   align-items: center;
-  margin: 10px;
+  margin: 2rem 1.5rem;
 }
 
 header h1 {
@@ -132,18 +132,20 @@ header h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
+  width: min(100dvw, 120ch);
+  padding: 0 1rem;
+  margin-inline: auto;
 
   gap: 10px;
-  padding: 0rem;
 }
 
 .post {
   background: var(--color-bg-weak);
   border-radius: var(--round-base);
   border: 2px var(--border) solid;
-  width: min(120ch, 90dvw);
   padding: 1rem;
+  width: 100%;
 }
 
 .post a {
@@ -196,8 +198,8 @@ header h1 {
   }
 
   .post .title {
-    text-align: center;
-    justify-content: center;
+    text-align: left;
+    justify-content: start;
   }
 
   .post .dates {
