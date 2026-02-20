@@ -23,10 +23,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build static site
         run: pnpm nuxi generate
@@ -40,4 +40,3 @@ jobs:
           TARGET: ${{ secrets.REMOTE_PATH }}
           SOURCE: ".output/public/"
           ARGS: "-rlgoDzvc --delete"
-
