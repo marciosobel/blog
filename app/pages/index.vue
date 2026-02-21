@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { locale, setLocale } = useI18n();
+const { locale, t } = useI18n();
 const route = useRoute();
 
 const { data: posts, pending } = await useAsyncData(
@@ -68,7 +68,7 @@ const results = computed(() => {
 
   <main>
     <div class="search-bar">
-      <input :placeholder="$t('search-posts-placeholder')" v-model="search" />
+      <input :placeholder="t('search-posts-placeholder')" v-model="search" />
       <LucideSearch />
     </div>
 
