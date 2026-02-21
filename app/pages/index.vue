@@ -11,9 +11,8 @@ const { data: posts, pending } = await useAsyncData(
   },
 );
 
-const title = "Márcio Sobel";
-const description =
-  "A silly developer who loves cats, art and coding on free time.";
+const title = () => "Márcio Sobel";
+const description = () => t("seo-description");
 
 useSeoMeta({
   title,
