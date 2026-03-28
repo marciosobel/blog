@@ -107,6 +107,10 @@ const results = computed(() => {
   margin: 0;
 }
 
+ul {
+  list-style-type: none;
+}
+
 header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;

@@ -62,10 +62,6 @@ code {
   font-family: "JetBrains Mono", monospace;
 }
 
-ul {
-  list-style-type: none;
-}
-
 button {
   display: flex;
   align-items: center;
