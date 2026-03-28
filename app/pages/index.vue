@@ -74,12 +74,12 @@ const results = computed(() => {
     <ul class="posts">
       <li class="post" v-for="post in results">
         <div class="title">
-          <NuxtLink
-            :to="generatePostUrl(post.stem, locale)"
+          <NuxtLinkLocale
+            :to="generatePostUrl(post.stem)"
             class="underline-link"
           >
             <h2>{{ post.title }}</h2>
-          </NuxtLink>
+          </NuxtLinkLocale>
           <div class="dates">
             <span>
               <LucideCalendar class="icon" />

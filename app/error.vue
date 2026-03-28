@@ -7,10 +7,6 @@ const props = defineProps<{
   error: NuxtError;
 }>();
 
-const mainPage = computed(() => {
-  return locale.value === defaultLocale ? "/" : `/${locale.value}`;
-});
-
 const title = () => `${$t("post-not-found")} - Márcio Sobel`;
 const description = () => $t("not-found-message");
 
@@ -46,7 +42,7 @@ useSeoMeta({
 
   <main class="not-found">
     <p style="">{{ $t("post-not-found") }}</p>
-    <button @click="navigateTo(mainPage)">
+    <button @click="navigateTo($localePath('/'))">
       {{ $t("back-to-homepage") }}
     </button>
   </main>
