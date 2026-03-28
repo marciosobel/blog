@@ -21,7 +21,8 @@
           nativeBuildInputs = with pkgs; [
             nodejs
             pnpm
-            vtsls
+            typescript-language-server
+            vue-language-server
           ];
         };
       }
