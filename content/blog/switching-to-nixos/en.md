@@ -53,7 +53,7 @@ Well, that's a simple explanation of how `nix` and NixOS works. You will probabl
 ## Should you migrate to NixOS?
 
 ### Pros
-First, let me funnel down to who I think NixOS suites best:
+First, let me funnel down to who I think NixOS suits best:
 #### Developers
 NixOS gives you such an amazing DX. It supports isolated, reproducible development environments, meaning that the argument "it works on my machine" actually means it works. You can think of this as Docker containers, but better! Also, you can use NixOS to declare a server structure, meaning that if you ever change architecture (maybe by switching hosts), you can have all your hosting settings and services up in seconds by copying the old machine `configuration.nix` file!
 #### Enthusiasts
