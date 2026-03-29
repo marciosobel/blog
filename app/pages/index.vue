@@ -43,7 +43,7 @@ const results = computed(() => {
       <li class="post" v-for="post in results">
         <div class="title">
           <NuxtLinkLocale
-            :to="extractPostSlug(post.stem)"
+            :to="`/${extractPostSlug(post.stem)}`"
             class="underline-link"
           >
             <h2>{{ post.title }}</h2>
