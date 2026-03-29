@@ -8,7 +8,7 @@ Hello! Recently, I've switched to [NixOS](https://nixos.org), and *oh boy* it wa
 
 I will dive in why is it good, it's cons, and whether or not you should use it.
 First, i'll talk about what even *is* NixOS and how does it stand out from other Linux distros.
-# What is Nix?
+## What is Nix?
 Before talking about NixOS, let me introduce you to `nix`. `nix` is a *functional package manager*. This means that it treats packages like values in a purely functional programming language (like Haskell). The packages aren't installed where you would expect (like `/usr/bin`); instead, they are installed in `/nix/store`. And each package has its own unique subdirectory. Take Firefox for example:
 ```
 /nix/store/b6gvzjyb2pg0kjfwrjmg1vfhh54ad73z-firefox-33.1/
@@ -16,7 +16,7 @@ Before talking about NixOS, let me introduce you to `nix`. `nix` is a *functiona
 This hash (`b6gvzjyb...`) is the unique identifier that will capture all the dependencies of this package. Thanks to the hashing, you are allowed to have multiple versions of the same package *at the same time,* without having to deal with dependencies conflicting or breaking.
 
 Also, due to the unique identifier, `nix` is able to remove unused packages using a *garbage collector*. This means your system always have only what you want!
-# What is NixOS?
+## What is NixOS?
 NixOS takes the `nix` package manager to the fullest, applying it's philosophy to a whole operating system. This means your kernel, drivers, monitor resolution, apps and configuration are all described in a functional, declarative manner.
 
 The system does not follow the [FHS standards](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html), meaning there is no `/bin`, `/lib` or `/usr`. Everything it contains is in the nix store.
@@ -50,20 +50,20 @@ nixos-rebuild test
 There are many other ways to rebuild your system, including building a VM, but I will not cover those here. Also, those two are probably the commands you'll run the most, anyway.
 
 Well, that's a simple explanation of how `nix` and NixOS works. You will probably want to dive deeper, and for that I can't recommend [Vimjoyer's channel](https://www.youtube.com/@vimjoyer) enough. There, you'll find more about the `nix` language, how to create modules, how to organize them and everything.
-# Should you migrate to NixOS?
+## Should you migrate to NixOS?
 
-## Pros
+### Pros
 First, let me funnel down to who I think NixOS suites best:
-### Developers
+#### Developers
 NixOS gives you such an amazing DX. It supports isolated, reproducible development environments, meaning that the argument "it works on my machine" actually means it works. You can think of this as Docker containers, but better! Also, you can use NixOS to declare a server structure, meaning that if you ever change architecture (maybe by switching hosts), you can have all your hosting settings and services up in seconds by copying the old machine `configuration.nix` file!
-### Enthusiasts
+#### Enthusiasts
 If you enjoy exploring stuff in tech, such as ricing, creating your own configs, or just tickling around in general, NixOS is a great fit! It's familiar enough to make you feel comfortable, while being different enough to keep things interesting and fun to mess with.
-## Cons
+### Cons
 Now, I think NixOS is **not** a good option for you if you:
-### Just want things to work fast
+#### Just want things to work fast
 If you just want to download VSCode and want it to work, or if you only use a browser, or even if you find that setting Neovim by yourself "too much work", then I think NixOS is not for you. Setting up NixOS is tedious and takes time. While you can just copy someone else's file to have a solid starting point, I believe that not making the system suit your own needs is not only a waste of it's potential and will only be a frustating experience if you ever want to change something.
-### Are new to Linux
+#### Are new to Linux
 If you're new to the Linux world, I think NixOS is too much to take. Go explore Ubuntu, Mint, or even Fedora. Then you can dive down into Arch, Void or NixOS. Get a feeling of how Linux works, how it's built to then be able to see how lower-level systems bends it to get the most out of it.
-# Conclusion
+## Conclusion
 At the end of the day, NixOS is another option
 That's it! Maybe I'll make more posts sharing the stuff I find on the system. Meanwhile, you can find my current dotfiles [here](https://github.com/marciosobel/dotfiles). See you next time!
