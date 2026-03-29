@@ -23,6 +23,8 @@
             pnpm
             typescript-language-server
             vue-language-server
+            prettierd
+            vscode-langservers-extracted
           ];
         };
       }
