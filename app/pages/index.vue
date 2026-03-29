@@ -1,45 +1,13 @@
 <script lang="ts" setup>
 const { locale, t } = useI18n();
-const route = useRoute();
 
-const { data: posts, pending } = await useAsyncData(
-  `posts-${locale.value}`,
-  () => {
-    return queryCollection(`content_${locale.value}`)
-      .order("meta", "DESC")
-      .all();
-  },
-);
-
-const title = () => "Márcio Sobel";
-const description = () => t("seo-description");
-
-useSeoMeta({
-  title,
-  description,
-
-  // Open Graph
-  ogTitle: title,
-  ogDescription: description,
-  ogType: "website",
-  ogUrl: `https://blog.marciosobel.dev${route.path}`,
-  ogImage: "https://blog.marciosobel.dev/og_image.png",
-
-  // Twitter
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  twitterDescription: description,
-  twitterImage: "https://blog.marciosobel.dev/og_image.png",
+const { data: posts } = await useAsyncData(`posts-${locale.value}`, () => {
+  return queryCollection(`content_${locale.value}`).order("meta", "DESC").all();
 });
 
-useHead({
-  htmlAttrs: { lang: locale.value },
-  link: [
-    {
-      rel: "canonical",
-      href: `https://blog.marciosobel.dev${route.path}`,
-    },
-  ],
+useAppSeo({
+  title: "Márcio Sobel",
+  description: () => t("seo-description"),
 });
 
 const search = ref("");
@@ -75,7 +43,7 @@ const results = computed(() => {
       <li class="post" v-for="post in results">
         <div class="title">
           <NuxtLinkLocale
-            :to="generatePostUrl(post.stem)"
+            :to="extractPostSlug(post.stem)"
             class="underline-link"
           >
             <h2>{{ post.title }}</h2>

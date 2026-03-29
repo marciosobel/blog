@@ -1,33 +1,16 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
 
-const { locale, defaultLocale } = useI18n();
+const { locale, defaultLocale, t } = useI18n();
 
 const props = defineProps<{
   error: NuxtError;
 }>();
 
-const title = () => `${$t("post-not-found")} - Márcio Sobel`;
-const description = () => $t("not-found-message");
-
-useSeoMeta({
-  title,
-  description,
-
-  // Open Graph (Facebook/LinedIn)
-  ogTitle: title,
-  ogDescription: description,
-  ogType: "website",
-  ogImage: "https://blog.marciosobel.dev/og_image_not_found.png",
-
-  // Twitter
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  twitterDescription: description,
-  twitterImage: "https://blog.marciosobel.dev/og_image_not_found.png",
-
-  // Crucial: Tell search engines not to index this page
-  robots: "noindex, nofollow",
+useAppSeo({
+  title: () => `${t("post-not-found")} - Márcio Sobel`,
+  description: () => t("not-found-message"),
+  noindex: true,
 });
 </script>
 

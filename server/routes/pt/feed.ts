@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
       description: post.description,
       date: parseDate(post.meta.date as string),
       author: "Márcio Sobel",
-      url: `https://blog.marciosobel.dev/${generatePostUrl(post.stem, "pt")}`,
+      url: `https://blog.marciosobel.dev/pt/${extractPostSlug(post.stem)}`,
       custom_elements: [
         {
           "content:encoded": { _cdata: html },

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { formatDate } from "#imports";
 const route = useRoute();
-const { locale, defaultLocale } = useI18n();
+const { locale, t } = useI18n();
 
 const { data: post } = await useAsyncData(
   `${route.params.slug}-${locale.value}`,
@@ -46,6 +46,12 @@ const { data: post } = await useAsyncData(
 );
 
 if (!post.value) {
+  useAppSeo({
+    title: () => `${t("post-not-found")} - Márcio Sobel`,
+    description: () => t("not-found-message"),
+    noindex: true,
+  });
+
   throw createError({
     status: 404,
     statusText: "Post not found",
@@ -53,58 +59,23 @@ if (!post.value) {
   });
 }
 
-const title = () => post.value!.title;
-const description = () => post.value!.description;
-const createdISO = () => post.value!.createdAt.iso;
-const updatedISO = () => post.value!.updatedAt.iso;
-const createdFormatted = () => post.value!.createdAt.formatted;
-const updatedFormatted = () => post.value!.updatedAt.formatted;
-
-const href = locale.value === defaultLocale ? "/" : `/${locale.value}`;
-
-useSeoMeta({
-  title,
-  titleTemplate: (s) => `${s || "Blog"} - Márcio Sobel`,
-  description: description,
-
-  // Open Graph (Facebook/LinkedIn)
-  ogTitle: title,
-  ogDescription: description,
-  ogType: "article",
-  ogUrl: `https://blog.marciosobel.dev${route.path}`,
-  ogImage: "https://blog.marciosobel.dev/og_image.png",
-
-  // Twitter
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  twitterDescription: description,
-  twitterImage: "https://blog.marciosobel.dev/og_image.png",
-
-  // Article Specifics
-  articleAuthor: ["Márcio Sobel"],
-  author: "Márcio Sobel",
-  articlePublishedTime: createdISO,
-  articleModifiedTime: updatedISO,
-});
-
-useHead({
-  htmlAttrs: { lang: locale.value },
-  link: [
-    {
-      rel: "canonical",
-      href: `https://blog.marciosobel.dev${route.path}`,
-    },
-  ],
+useAppSeo({
+  title: () => post.value!.title,
+  description: () => post.value!.description,
+  slug: extractPostSlug(post.value.stem),
+  type: "article",
+  createdAt: () => post.value!.createdAt.iso,
+  updatedAt: () => post.value!.updatedAt.iso,
 });
 </script>
 
 <template>
   <header>
     <div class="header-buttons">
-      <NuxtLink :to="href" class="go-back">
+      <NuxtLinkLocale to="/" class="go-back">
         <LucideArrowLeft class="back-icon" />
         <p class="underline-link">{{ $t("all-posts") }}</p>
-      </NuxtLink>
+      </NuxtLinkLocale>
       <ThemeSwitcher />
     </div>
 
