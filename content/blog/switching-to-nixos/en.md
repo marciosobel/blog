@@ -65,5 +65,4 @@ If you just want to download VSCode and want it to work, or if you only use a br
 #### Are new to Linux
 If you're new to the Linux world, I think NixOS is too much to take. Go explore Ubuntu, Mint, or even Fedora. Then you can dive down into Arch, Void or NixOS. Get a feeling of how Linux works, how it's built to then be able to see how lower-level systems bends it to get the most out of it.
 ## Conclusion
-At the end of the day, NixOS is another option
 That's it! Maybe I'll make more posts sharing the stuff I find on the system. Meanwhile, you can find my current dotfiles [here](https://github.com/marciosobel/dotfiles). See you next time!
