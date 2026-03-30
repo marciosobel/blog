@@ -1,5 +1,5 @@
 interface SeoOptions {
-  title: string | (() => string | undefined);
+  title?: string | (() => string | undefined);
   description: string | (() => string | undefined);
   type?: "website" | "article";
   slug?: string;

@@ -6,7 +6,6 @@ const { data: posts } = await useAsyncData(`posts-${locale.value}`, () => {
 });
 
 useAppSeo({
-  title: "Márcio Sobel",
   description: () => t("seo-description"),
 });
 
