@@ -1,6 +1,6 @@
 ---
-import { defaultLanguage, useLocale, languages } from "@/i18n.ts";
-import { constants } from "@/constants.ts";
+import { defaultLanguage, useLocale, languages } from "@/i18n";
+import { constants } from "@/constants";
 const { post, lang = defaultLanguage } = Astro.props;
 
 const t = useLocale(lang);

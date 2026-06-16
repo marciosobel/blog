@@ -1,6 +1,9 @@
 ---
 import "@/styles/global.css";
-import { defaultLanguage } from "@/i18n.ts";
+import { defaultLanguage } from "@/i18n";
+
+import Header from "@/components/page-header.astro";
+import Footer from "@/components/page-footer.astro";
 import PostList from "@/components/post-list.astro";
 import Seo from "@/components/seo.astro";
 ---
@@ -8,6 +11,16 @@ import Seo from "@/components/seo.astro";
 <html lang={defaultLanguage}>
   <Seo />
   <body>
-    <PostList />
+    <Header />
+    <main>
+      <PostList />
+    </main>
+    <Footer />
   </body>
 </html>
+
+<style>
+  main {
+    flex-grow: 1;
+  }
+</style>

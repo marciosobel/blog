@@ -9,6 +9,31 @@ import Sun from "@/components/icons/sun.svg";
 </button>
 
 <style>
+  #theme-toggler {
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 100%;
+    background: transparent;
+    transition:
+      opacity 125ms ease,
+      transform 125ms ease;
+  }
+
+  #theme-toggler:hover {
+    transform: scale(1.1);
+  }
+
+  #theme-toggler:active {
+    transform: scale(1.05);
+  }
+
+  #theme-switcher > * {
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-text);
+  }
+
   .moon {
     display: none;
   }
@@ -23,17 +48,23 @@ import Sun from "@/components/icons/sun.svg";
 </style>
 
 <script>
-  const theme: "dark" | "light" = (() => {
-    const localStorageTheme = localStorage?.getItem("theme") ?? "";
-    if (localStorageTheme in ["dark", "light"]) {
-      return localStorageTheme as "dark" | "light";
+  const theme = (() => {
+    const localStorageTheme = window.localStorage?.getItem("theme") ?? "";
+    if (localStorageTheme === "dark" || localStorageTheme === "light") {
+      return localStorageTheme;
     }
+
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
     return prefersDark ? "dark" : "light";
   })();
+
   window.localStorage.setItem("theme", theme);
+
+  if (theme === "dark") {
+    document.documentElement.classList.add("dark");
+  }
 
   const toggleTheme = () => {
     const element = document.documentElement;
