@@ -1,0 +1,48 @@
+---
+import { defaultLanguage } from "@/i18n";
+import Earth from "@/components/icons/earth.svg";
+import Rss from "@/components/icons/rss.svg";
+import Github from "@/components/icons/github.svg";
+
+const { lang = defaultLanguage } = Astro.params;
+---
+
+<footer>
+  <a href="https://marciosobel.dev" rel="noreferrer" rel="noopener">
+    <button><Earth class="icon" /></button>
+  </a>
+
+  <a href="https://github.com/marciosobel" rel="noreferrer" rel="noopener">
+    <button><Github class="icon" /></button>
+  </a>
+
+  <a>
+    <button><Rss class="icon" /></button>
+  </a>
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.875rem;
+    padding-block: 0.875rem;
+  }
+
+  button {
+    aspect-ratio: 1 / 1;
+    padding: 0.5rem;
+    background: transparent;
+    transition: background 150ms ease;
+  }
+
+  button:hover {
+    background: var(--color-bg-weak);
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+</style>

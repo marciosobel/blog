@@ -1,0 +1,25 @@
+---
+import { languages, defaultLanguage, useLocale } from "@/i18n";
+import Languages from "@/components/icons/languages.svg";
+
+const { lang = defaultLanguage } = Astro.params;
+const t = useLocale(lang);
+
+const currentIndex = languages.indexOf(lang);
+const nextIndex = (currentIndex + 1) % languages.length;
+const nextLanguage =
+  languages[nextIndex] === defaultLanguage ? "" : languages[nextIndex];
+---
+
+<a href={`/${nextLanguage}`}>
+  <button id="locale-switcher">
+    <Languages width="16" height="16" />
+    {t("locale")}: {lang}
+  </button>
+</a>
+
+<style>
+  #locale-switcher {
+    text-wrap: nowrap;
+  }
+</style>

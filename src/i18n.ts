@@ -4,12 +4,14 @@ export const entries = {
     "search-posts": "Search posts...",
     "seo-description":
       "A silly developer who loves cats, art and coding on free time.",
+    locale: "Locale",
   },
   pt: {
     "post-not-found": "Post não encontrado",
     "search-posts": "Procurar posts...",
     "seo-description":
       "Um desenvolvedor que ama gatos, arte e programação no tempo livre",
+    locale: "Idioma",
   },
 };
 

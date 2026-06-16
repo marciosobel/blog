@@ -1,18 +1,22 @@
 ---
 import "@/styles/global.css";
-import { languages, getCollection, getEntry } from "@/i18n";
+import { languages, getCollection, getEntry, defaultLanguage } from "@/i18n";
+import Seo from "@/components/seo.astro";
 import Post from "@/components/post.astro";
 
 export async function getStaticPaths() {
-  const paths = languages.flatMap(async (lang) => {
-    const posts = await getCollection(lang);
-    return posts.map((post) => ({
-      params: { slug: post.id, lang },
-      props: { post },
-    }));
-  });
+  const paths = [];
 
-  return await Promise.all(paths);
+  for (const lang of languages) {
+    const posts = await getCollection(lang);
+    for (const post of posts) {
+      paths.push({
+        params: { slug: post.id, lang },
+        props: { post },
+      });
+    }
+  }
+  return paths;
 }
 
 const { lang } = Astro.params;

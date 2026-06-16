@@ -1,14 +1,123 @@
 :root {
-  --background: #fff;
-  --text: #000;
+  --color-bg: #f5e8d8;
+  --color-bg-nav: #f5e8d8c5;
+  --color-bg-weak: #f2e1d0;
+  --color-text: #1c1c1c;
+  --border: #1c1c1c09;
+  --color-accent1: #ff4500;
+  --color-accent2: #daa520;
+  --color-hover: #ff6f61;
+  --round-base: 5px;
+  --main-font: Nunito, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  background-color: var(--color-bg);
 }
 
 :root.dark {
-  --background: #000;
-  --text: #fff;
+  --color-bg: #1c1c1c;
+  --color-bg-nav: #1c1c1cc5;
+  --border: #ffffff0c;
+  --color-bg-weak: #262626;
+  --color-text: #f5e8d8;
+  --color-accent1: #ff6f61;
+  --color-accent2: #daa520;
+  --color-hover: #ff4500;
+}
+
+:root.dark .astro-code,
+:root.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+::selection,
+::-moz-selection {
+  background: var(--color-accent1);
+  color: var(--color-bg);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--text);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--main-font);
+  scroll-behavior: smooth;
+
+  margin: 0;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+pre,
+code {
+  font-family: "JetBrains Mono", monospace;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-bg-weak);
+  border: 0;
+  border-radius: var(--round-base);
+  gap: 0.625rem;
+  cursor: pointer;
+
+  color: var(--color-text);
+  font-family: var(--main-font);
+}
+
+.underline-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.underline-link:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0.125rem;
+  background-color: var(--color-accent1);
+  border-radius: var(--round-base);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 125ms ease;
+}
+
+.underline-link:hover:after,
+.underline-link.active:after {
+  width: 100%;
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+input {
+  background: var(--color-bg-weak);
+  color: var(--color-text);
+  border: 2px var(--border) solid;
+  border-radius: var(--round-base);
+  padding: 0.5rem 0.625rem;
+  font-family: var(--main-font);
+}
+
+input:focus {
+  outline: 2px solid var(--color-accent1);
 }

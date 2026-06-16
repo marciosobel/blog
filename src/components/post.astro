@@ -1,8 +1,9 @@
 ---
 import { render } from "astro:content";
-import { constants } from "@/constants.ts";
-import { defaultLanguage } from "@/i18n.ts";
+import { constants } from "@/constants";
+import { defaultLanguage } from "@/i18n";
 import Seo from "@/components/seo.astro";
+import ThemeSwitcher from "@/components/theme-switcher.astro";
 
 const { post, lang = defaultLanguage } = Astro.props;
 const { title, description, posted: postedAt, updated: updatedAt } = post.data;
@@ -11,9 +12,8 @@ const { Content } = await render(post);
 
 <html>
   <Seo lang={lang} />
-
-  <h1>{title}</h1>
-  <p>{description}</p>
-
+  <header>
+    <ThemeSwitcher />
+  </header>
   <Content />
 </html>
