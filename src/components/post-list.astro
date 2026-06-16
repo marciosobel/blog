@@ -1,0 +1,65 @@
+---
+import {
+  defaultLanguage,
+  getCollection,
+  useLocale,
+  languages,
+  type Language,
+} from "@/i18n";
+import { constants } from "@/constants";
+import Seo from "@/components/seo.astro";
+import ThemeSwitcher from "@/components/theme-switcher.astro";
+
+const { lang = defaultLanguage } = Astro.props;
+const t = useLocale(lang);
+
+const posts = (await getCollection(lang)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const generateHref = (uri: string): string => {
+  const isDefaultLanguage = lang === defaultLanguage;
+  const prefix = isDefaultLanguage ? "" : lang;
+  return `${prefix}/${uri}`;
+};
+---
+
+<ThemeSwitcher />
+
+<input
+  id="search-input"
+  type="search"
+  autocomplete="off"
+  placeholder={t("search-posts")}
+/>
+
+<ul id="search-list">
+  {
+    posts.map((post) => (
+      <li
+        data-title={post.data.title.toLowerCase()}
+        data-id={post.id.toLowerCase()}
+      >
+        <a href={generateHref(post.id)}>{post.data.title}</a>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  const searchInput = document.getElementById("search-input");
+  const listItems = document.querySelectorAll("#search-list li");
+
+  searchInput?.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    listItems.forEach((item) => {
+      const id = item.getAttribute("data-id");
+      const title = item.getAttribute("data-title");
+      if (title.includes(query) || id.includes(query)) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  });
+</script>

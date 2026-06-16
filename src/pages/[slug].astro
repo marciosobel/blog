@@ -1,0 +1,24 @@
+---
+import "@/styles/global.css";
+import { getCollection, defaultLanguage } from "@/i18n";
+import Post from "@/components/post.astro";
+import Seo from "@/components/seo.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { slug } = Astro.params;
+const { post } = Astro.props;
+---
+
+<html lang={defaultLanguage}>
+  <Seo post={post} />
+  <body>
+    <Post post={post} />
+  </body>
+</html>

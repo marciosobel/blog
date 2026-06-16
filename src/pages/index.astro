@@ -1,0 +1,13 @@
+---
+import "@/styles/global.css";
+import { defaultLanguage } from "@/i18n.ts";
+import PostList from "@/components/post-list.astro";
+import Seo from "@/components/seo.astro";
+---
+
+<html lang={defaultLanguage}>
+  <Seo />
+  <body>
+    <PostList />
+  </body>
+</html>
