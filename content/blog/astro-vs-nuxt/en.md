@@ -146,8 +146,8 @@ export function getCollection(locale: Locale = defaultLocale) {
 The page architecture looked like this:
 ```
 src/
-├──  content.config.ts
-├──  i18n.ts
+├── content.config.ts
+├── i18n.ts
 ├── pages/
 │   ├── [lang]/
 │   │   ├── [slug].astro

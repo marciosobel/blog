@@ -75,7 +75,7 @@ const { slug } = Astro.params;
 <p>Slug: {slug}</p>
 ```
 Então usei isso para pegar o ID de um post. Felizmente, o Astro já possui uma função específica para pegar um item de uma coleção: `getEntry`. Ela recebe a coleção e o ID para buscar. Após isso, precisava saber como mostrar o conteúdo `markdown` em `HTML`. Então me deparo com a função `render`, que útil!
-```
+```astro
 ---
 import { getEntry, render } from "astro:content";
 const { slug } = Astro.params;
@@ -146,8 +146,8 @@ export function getCollection(locale: Locale = defaultLocale) {
 A arquitetura das páginas ficou assim:
 ```
 src/
-├──  content.config.ts
-├──  i18n.ts
+├── content.config.ts
+├── i18n.ts
 ├── pages/
 │   ├── [lang]/
 │   │   ├── [slug].astro
