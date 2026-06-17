@@ -5,6 +5,9 @@ export const entries = {
     "seo-description":
       "A silly developer who loves cats, art and coding on free time.",
     locale: "Locale",
+    "all-posts": "All posts",
+    "post-posted-at": "Posted at",
+    "post-updated-at": "",
   },
   pt: {
     "post-not-found": "Post não encontrado",
@@ -12,6 +15,9 @@ export const entries = {
     "seo-description":
       "Um desenvolvedor que ama gatos, arte e programação no tempo livre",
     locale: "Idioma",
+    "all-posts": "Todos os posts",
+    "post-posted-at": "Publicado em",
+    "post-updated-at": "Atualizado em",
   },
 };
 

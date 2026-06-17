@@ -8,7 +8,9 @@
   --color-accent2: #daa520;
   --color-hover: #ff6f61;
   --round-base: 5px;
-  --main-font: Nunito, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --main-font:
+    var(--font-nunito), "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --code-font: var(--font-jetbrains-mono), monospace;
 
   background-color: var(--color-bg);
 }
@@ -27,7 +29,6 @@
 :root.dark .astro-code,
 :root.dark .astro-code span {
   color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
@@ -65,7 +66,7 @@ a {
 
 pre,
 code {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--code-font);
 }
 
 button {
@@ -120,4 +121,10 @@ input {
 
 input:focus {
   outline: 2px solid var(--color-accent1);
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

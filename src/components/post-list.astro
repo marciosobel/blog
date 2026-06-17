@@ -38,7 +38,7 @@ const generateHref = (uri: string): string => {
   <Search />
 </div>
 
-<ul id="post-list">
+<ul id="post-list" class="flex-center">
   {
     posts.map((post) => (
       <li
@@ -131,10 +131,7 @@ const generateHref = (uri: string): string => {
 
   #post-list {
     list-style-type: none;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: min(100vw, 120ch);
     padding: 0 1rem;
     margin-inline: auto;

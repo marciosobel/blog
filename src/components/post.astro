@@ -3,7 +3,8 @@ import { render } from "astro:content";
 import { constants } from "@/constants";
 import { defaultLanguage } from "@/i18n";
 import Seo from "@/components/seo.astro";
-import ThemeSwitcher from "@/components/theme-switcher.astro";
+import PostHeader from "@/components/post-header.astro";
+import PageFooter from "@/components/page-footer.astro";
 
 const { post, lang = defaultLanguage } = Astro.props;
 const { title, description, posted: postedAt, updated: updatedAt } = post.data;
@@ -11,9 +12,110 @@ const { Content } = await render(post);
 ---
 
 <html>
-  <Seo lang={lang} />
-  <header>
-    <ThemeSwitcher />
-  </header>
-  <Content />
+  <PostHeader post={post} />
+
+  <main>
+    <Content />
+  </main>
+
+  <PageFooter />
 </html>
+
+<style>
+  main {
+    padding-inline: 1.875rem;
+    margin-inline: auto;
+    max-width: 75ch;
+    line-height: 1.45;
+    font-size: 1.125rem;
+    overflow-wrap: break-word;
+    flex-grow: 1;
+  }
+
+  :global(h1),
+  :global(h2),
+  :global(h3),
+  :global(h4),
+  :global(h5),
+  :global(h6) {
+    line-height: 1.2;
+  }
+
+  :global(blockquote) {
+    position: relative;
+  }
+
+  :global(blockquote p) {
+    opacity: 75%;
+  }
+
+  :global(blockquote::after) {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0.25rem;
+    left: -1.25rem;
+    top: 0;
+    background: var(--color-text);
+    border-radius: var(--round-base);
+    opacity: 25%;
+  }
+
+  :global(code) {
+    background: var(--color-bg-weak);
+    padding-inline: 0.375rem;
+    border-radius: var(--round-base);
+    font-size: 0.975rem;
+  }
+
+  :global(pre) {
+    background: var(--color-bg-weak) !important;
+    padding: 0.625rem;
+    border-radius: var(--round-base);
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  :global(pre code) {
+    padding: 0;
+  }
+
+  :global(.md-heading) {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  :global(.md-heading-icon) {
+    opacity: 0;
+    transition: opacity 100ms ease;
+  }
+
+  :global(.md-heading:hover .md-heading-icon) {
+    opacity: 1;
+  }
+
+  :global(.md-link) {
+    text-decoration: none;
+    box-shadow: inset 0 -2px 0 0 var(--color-accent1);
+  }
+
+  /* If the link contains a code tag, remove the shadow from the link... */
+  :global(.md-link:has(code)) {
+    box-shadow: none;
+  }
+
+  /* ...and apply it to the code tag instead, so it hugs the background */
+  :global(.md-link code) {
+    box-shadow: inset 0 -2px 0 0 var(--color-accent1);
+    border-radius: var(--round-base) var(--round-base) 0px 0px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    main {
+      max-width: 90dvw;
+      padding: 0;
+      font-size: 2.05rem;
+    }
+  }
+</style>

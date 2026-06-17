@@ -7,7 +7,7 @@ import Github from "@/components/icons/github.svg";
 const { lang = defaultLanguage } = Astro.params;
 ---
 
-<footer>
+<footer class="flex-center">
   <a href="https://marciosobel.dev" rel="noreferrer" rel="noopener">
     <button><Earth class="icon" /></button>
   </a>
@@ -23,9 +23,6 @@ const { lang = defaultLanguage } = Astro.params;
 
 <style>
   footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 0.875rem;
     padding-block: 0.875rem;
   }
