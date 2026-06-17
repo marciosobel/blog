@@ -1,0 +1,115 @@
+---
+import { useLocale } from "@/i18n";
+import { formatDate } from "@/utils/format-date";
+
+import ThemeSwitcher from "@/components/theme-switcher.astro";
+import ArrowLeft from "@/components/icons/arrow-left.svg";
+import Calendar from "@/components/icons/calendar.svg";
+import Clock from "@/components/icons/clock.svg";
+
+const { lang } = Astro.params;
+const { post } = Astro.props;
+
+const t = useLocale(lang);
+const homeHref = lang ? `/${lang}` : "/";
+---
+
+<header>
+  <div id="header-buttons" class="flex-center">
+    <a id="back-to-all-posts" class="flex-center" href={homeHref}>
+      <ArrowLeft class="icon" />
+      <span class="underline-link">{t("all-posts")}</span>
+    </a>
+
+    <ThemeSwitcher />
+  </div>
+
+  <div id="title" class="flex-center">
+    <h1>{post.data.title}</h1>
+
+    <aside id="metadata" class="flex-center">
+      <span>
+        <Calendar class="icon" />{t("post-posted-at")}
+        {formatDate(post.data.date)}
+      </span>
+      {
+        post.data.updated && (
+          <span>
+            <span class="date-divider" aria-hidden>
+              &nbsp; ·&nbsp;
+            </span>
+            <Clock class="icon" />
+            {t("post-updated-at")}
+            {formatDate(post.data.updated)}
+          </span>
+        )
+      }
+    </aside>
+  </div>
+</header>
+
+<style>
+  header {
+    margin: 2rem 1.5rem;
+  }
+
+  #header-buttons {
+    justify-content: space-between;
+  }
+
+  #title {
+    margin-top: 1.25rem;
+    flex-direction: column;
+  }
+
+  #title h1 {
+    margin: 0;
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+
+  #metadata {
+    text-wrap: nowrap;
+  }
+
+  #metadata span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    opacity: 75%;
+    font-size: 0.9rem;
+  }
+
+  span .icon {
+    width: 0.825rem;
+  }
+
+  #back-to-all-posts {
+    justify-content: start;
+    gap: 0.5rem;
+  }
+
+  #back-to-all-posts span {
+    margin: 0;
+    transform: translateY(1px);
+  }
+
+  #back-to-all-posts .icon {
+    user-select: none;
+    transition: transform 100ms ease;
+  }
+
+  #back-to-all-posts:hover .icon {
+    transform: translateX(-20%);
+  }
+
+  @media only screen and (max-width: 800px) {
+    #metadata {
+      flex-direction: column;
+    }
+
+    .date-divider {
+      display: none !important;
+    }
+  }
+</style>

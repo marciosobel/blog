@@ -5,7 +5,7 @@ import ThemeSwitcher from "@/components/theme-switcher.astro";
 
 <header>
   <h1>Márcio Sobel - Blog</h1>
-  <div class="header-buttons">
+  <div class="header-buttons flex-center">
     <LocaleSwitcher />
     <ThemeSwitcher />
   </div>
@@ -33,9 +33,6 @@ import ThemeSwitcher from "@/components/theme-switcher.astro";
 
   .header-buttons {
     justify-self: end;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 0.875rem;
 
     width: fit-content;

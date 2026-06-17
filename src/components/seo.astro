@@ -1,25 +1,31 @@
 ---
 import { defaultLanguage, useLocale, languages } from "@/i18n";
 import { constants } from "@/constants";
+import { Font } from "astro:assets";
+
 const { post, lang = defaultLanguage } = Astro.props;
 
 const t = useLocale(lang);
-
-const title = post
-  ? `${post.data.title} - Márcio Sobel`
-  : "Blog - Márcio Sobel";
-const description = post ? post.data.description : t("seo-description");
 
 const generateHref = (uri: string, language: Language = lang): string => {
   const isDefaultLanguage = language === defaultLanguage;
   const suffix = isDefaultLanguage ? "" : language;
   return `${uri}/${suffix}`;
 };
+
+const title = post
+  ? `${post.data.title} - Márcio Sobel`
+  : "Blog - Márcio Sobel";
+const description = post ? post.data.description : t("seo-description");
+const content = post ? "article" : "website";
+const url = generateHref(constants.BASE_URL);
 ---
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <Font cssVariable="--font-nunito" preload />
+  <Font cssVariable="--font-jetbrains-mono" />
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" href="/favicon.ico" />
@@ -39,8 +45,8 @@ const generateHref = (uri: string, language: Language = lang): string => {
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content={post ? "article" : "website"} />
-  <meta property="og:url" content={generateHref(constants.BASE_URL)} />
+  <meta property="og:type" content={content} />
+  <meta property="og:url" content={url} />
   <meta property="og:image" content={constants.OG_IMAGE_URL} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="robots" content="index, follow" />
