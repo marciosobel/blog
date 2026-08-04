@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const colorMode = useColorMode();
+const { t } = useI18n();
 
 const toggleTheme = () => {
   const isDark = colorMode.value === "dark";
@@ -8,10 +9,14 @@ const toggleTheme = () => {
 </script>
 
 <template>
-  <button class="theme-switcher" @click="toggleTheme">
+  <button
+    class="theme-switcher"
+    @click="toggleTheme"
+    :aria-label="t('change-theme')"
+  >
     <ClientOnly>
-      <LucideSun v-if="colorMode.value == 'dark'" />
-      <LucideMoon v-else-if="colorMode.value == 'light'" />
+      <LucideSun v-if="colorMode.value == 'dark'" aria-hidden />
+      <LucideMoon v-else-if="colorMode.value == 'light'" aria-hidden />
     </ClientOnly>
   </button>
 </template>

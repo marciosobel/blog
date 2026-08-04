@@ -34,7 +34,12 @@ const results = computed(() => {
 
   <main>
     <div class="search-bar">
-      <input :placeholder="t('search-posts-placeholder')" v-model="search" />
+      <input
+        :placeholder="t('search-posts-placeholder')"
+        v-model="search"
+        name="search-posts"
+        :aria-label="t('search-posts-label')"
+      />
       <LucideSearch />
     </div>
 

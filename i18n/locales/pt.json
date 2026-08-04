@@ -7,5 +7,8 @@
   "not-found-message": "O post que você está procurando não existe ou foi removido.",
   "back-to-homepage": "Voltar para a página inicial",
   "search-posts-placeholder": "Pesquisar posts...",
-  "seo-description": "Um desenvolvedor que ama gatos, arte e programação no tempo livre."
+  "search-posts-label": "Pesquisar posts",
+  "seo-description": "Um desenvolvedor que ama gatos, arte e programação no tempo livre.",
+  "main-website": "Website principal",
+  "change-theme": "Alterar tema"
 }
