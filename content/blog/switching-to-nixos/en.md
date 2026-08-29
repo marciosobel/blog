@@ -2,6 +2,9 @@
 title: Why I switched to NixOS (And why you should, too)
 description: Recently, I've switched to NixOS, making all my system declarative. In this post, I'll explain the pros, the cons, and if switching might be a good option for you.
 date: 2026-03-28
+tags:
+  - nix
+  - linux
 ---
 
 Hello! Recently, I've switched to [NixOS](https://nixos.org), and *oh boy* it was one of the best things I've done. My system has never been so stable, while so freeing at the same time. I also have a lot more control over it: what's installed, where each config is, enabled services, daemons and so on. The `nixpkgs` repository is ***huge.*** And I do mean it: [it's bigger than the AUR](https://repology.org/repositories/graphs)!

@@ -2,6 +2,9 @@
 title: Porque eu troquei para o NixOS (E porque você também deveria)
 description: Recentemente, eu troquei para o NixOS, deixando todo o meu sistema declarativo. Nesse post, eu vou explicar os prós, os contras, e se migrar pode ser uma boa opção para você.
 date: 2026-03-28
+tags:
+  - nix
+  - linux
 ---
 Oi! Recentemente, mudei para o [NixOS](https://nixos.org) e foi uma das melhores coisas que já fiz. Meu sistema nunca esteve tão estável e, ao mesmo tempo, tão permissivo. Também sinto que tenho muito mais controle: o que está instalado, onde cada config fica, serviços ativos, daemons e por aí vai. O repositório `nixpkgs` é ***gigante***. Sério: [ele é maior que o AUR](https://repology.org/repositories/graphs)!
 

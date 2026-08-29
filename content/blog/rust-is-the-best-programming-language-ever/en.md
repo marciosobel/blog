@@ -3,6 +3,9 @@ title: Rust is the BEST programming language
 description: And I can prove it.
 date: 2026-01-19
 updated: 2026-01-29
+tags:
+  - rust
+  - development
 ---
 You’re probably already tired of hearing that “Rust is safe”, “Rust is the most loved programming language in the world,” “Rust is the future.”
 

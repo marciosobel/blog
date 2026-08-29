@@ -3,6 +3,9 @@ title: Rust é a MELHOR linguagem de programação
 description: E eu posso provar.
 date: 2026-01-19
 updated: 2026-01-29
+tags:
+  - rust
+  - development
 ---
 Você já deve estar farto de ouvir que "Rust é seguro", "Rust é a linguagem de programação mais amada do mundo", "Rust é o futuro".
 

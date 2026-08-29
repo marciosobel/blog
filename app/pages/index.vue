@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const { locale, t } = useI18n();
+const route = useRoute();
 
 const { data: posts } = await useAsyncData(`posts-${locale.value}`, () => {
   return queryCollection(`content_${locale.value}`).order("meta", "DESC").all();
@@ -9,7 +10,17 @@ useAppSeo({
   description: () => t("seo-description"),
 });
 
-const search = ref("");
+const search = ref(
+  typeof route.query.search === "string" ? route.query.search : "",
+);
+
+watch(
+  () => route.query.search,
+  (value) => {
+    search.value = typeof value === "string" ? value : "";
+  },
+);
+
 const results = computed(() => {
   if (!search.value || !posts.value) return posts.value;
 
@@ -17,7 +28,8 @@ const results = computed(() => {
   return posts.value.filter(
     (post) =>
       post.title.toLowerCase().includes(searchTerm) ||
-      post.description.toLowerCase().includes(searchTerm),
+      post.description.toLowerCase().includes(searchTerm) ||
+      post.tags?.some((tag) => tag.toLowerCase().includes(searchTerm)),
   );
 });
 </script>
@@ -35,8 +47,8 @@ const results = computed(() => {
   <main>
     <div class="search-bar">
       <input
-        :placeholder="t('search-posts-placeholder')"
         v-model="search"
+        :placeholder="t('search-posts-placeholder')"
         name="search-posts"
         :aria-label="t('search-posts-label')"
       />
@@ -44,7 +56,7 @@ const results = computed(() => {
     </div>
 
     <ul class="posts">
-      <li class="post" v-for="post in results">
+      <li v-for="post in results" :key="post.id" class="post">
         <div class="title">
           <NuxtLinkLocale
             :to="`/${extractPostSlug(post.stem)}`"
@@ -59,14 +71,15 @@ const results = computed(() => {
             </span>
             <span>
               <template v-if="post.meta.updated">
-                <span class="date-divider">&nbsp;· </span
-                ><LucideClock3 class="icon" />
+                <span class="date-divider">&nbsp;· </span>
+                <LucideClock3 class="icon" />
                 {{ formatDate(post.meta.date, locale) }}
               </template>
             </span>
           </div>
         </div>
         <p>{{ post.description }}</p>
+        <PostTags :tags="post.tags" />
       </li>
     </ul>
   </main>
@@ -135,6 +148,14 @@ main {
 
 .post a {
   text-decoration: none;
+}
+
+.post > p {
+  margin-bottom: 0.625rem;
+}
+
+.post > p:last-child {
+  margin-bottom: 0;
 }
 
 .post .title {

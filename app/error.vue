@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
 
-const { locale, defaultLocale, t } = useI18n();
+const { t } = useI18n();
 
 const props = defineProps<{
   error: NuxtError;
@@ -24,9 +24,9 @@ useAppSeo({
   </header>
 
   <main class="not-found">
-    <p style="">{{ $t("post-not-found") }}</p>
+    <p style="">{{ t("post-not-found") }}</p>
     <button @click="navigateTo($localePath('/'))">
-      {{ $t("back-to-homepage") }}
+      {{ t("back-to-homepage") }}
     </button>
   </main>
 </template>

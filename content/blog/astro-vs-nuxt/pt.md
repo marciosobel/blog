@@ -2,7 +2,10 @@
 title: "Astro vs. Nuxt: Qual você deveria usar para o seu blog?"
 description: Se você está querendo iniciar um blog, provavelmente vai se deparar com essas duas opções tão populares. Neste post, vou dissertar sobre os pontos positivos e negativos de cada um.
 date: 2026-06-17
-updated:
+tags:
+  - astro
+  - nuxt
+  - development
 ---
 Olá! Nesses últimos dias, eu dei uma olhada no [Astro](https://astro.build/), uma framework para websites que tem como seu foco principal o conteúdo; ou seja, ela foi feita pensando diretamente em artigos, documentações e blogs.
 

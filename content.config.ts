@@ -5,12 +5,18 @@ export default defineContentConfig({
     content_en: defineCollection({
       type: "page",
       source: "blog/**/en.md",
-      schema: z.object({ rawbody: z.string() }),
+      schema: z.object({
+        rawbody: z.string(),
+        tags: z.array(z.string()).optional(),
+      }),
     }),
     content_pt: defineCollection({
       type: "page",
       source: "blog/**/pt.md",
-      schema: z.object({ rawbody: z.string() }),
+      schema: z.object({
+        rawbody: z.string(),
+        tags: z.array(z.string()).optional(),
+      }),
     }),
   },
 });

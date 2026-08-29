@@ -7,6 +7,7 @@ interface SeoOptions {
   noindex?: boolean;
   createdAt?: string | (() => string | undefined);
   updatedAt?: string | (() => string | undefined);
+  tags?: string[] | (() => string[] | undefined);
 }
 
 export default function (options: SeoOptions) {
@@ -24,6 +25,7 @@ export default function (options: SeoOptions) {
           author: "Márcio Sobel",
           articlePublishedTime: options.createdAt,
           articleModifiedTime: options.updatedAt,
+          articleTag: options.tags,
         }
       : {};
   useSeoMeta({

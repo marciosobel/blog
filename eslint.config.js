@@ -8,6 +8,9 @@ export default [
   {
     rules: {
       "vue/no-unused-vars": "warn",
+      "vue/multi-word-component-names": "off",
+      "vue/max-attributes-per-line": "off",
+      "vue/html-self-closing": "off",
     },
     languageOptions: {
       sourceType: "module",

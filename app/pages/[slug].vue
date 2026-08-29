@@ -66,6 +66,7 @@ useAppSeo({
   type: "article",
   createdAt: () => post.value!.createdAt.iso,
   updatedAt: () => post.value!.updatedAt.iso,
+  tags: () => post.value!.tags,
 });
 </script>
 
@@ -92,6 +93,7 @@ useAppSeo({
           {{ post!.updatedAt.formatted }}
         </span>
       </aside>
+      <PostTags :tags="post!.tags" />
     </div>
   </header>
 
@@ -133,6 +135,11 @@ useAppSeo({
   align-items: center;
   justify-content: center;
   text-wrap: nowrap;
+}
+
+.title :deep(.post-tags) {
+  justify-content: center;
+  margin-top: 0.75rem;
 }
 
 .metadata span {
@@ -181,7 +188,9 @@ main {
 }
 
 header {
-  margin: 2rem 1.5rem;
+  margin-inline: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
 }
 
 :deep(h1),
