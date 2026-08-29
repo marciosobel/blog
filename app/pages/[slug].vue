@@ -99,6 +99,7 @@ useAppSeo({
 
   <main>
     <ContentRenderer :value="post!" tag="article" class="content" />
+    <PostIndex :links="post!.body.toc?.links" />
   </main>
 
   <Footer />
@@ -178,13 +179,23 @@ header .go-back {
 }
 
 main {
-  padding-inline: 30px;
-  margin-inline: auto;
-  max-width: 75ch;
+  display: grid;
+  grid-template-columns: minmax(30px, 1fr) minmax(0, 75ch) minmax(30px, 1fr);
+  width: 100%;
   line-height: 1.45;
   font-size: 1.125rem;
   overflow-wrap: break-word;
   flex-grow: 1;
+}
+
+.content {
+  grid-column: 2;
+  min-width: 0;
+}
+
+main :deep(.post-index) {
+  grid-column: 3;
+  grid-row: 1;
 }
 
 header {
@@ -243,8 +254,7 @@ header {
 
 @media only screen and (max-width: 800px) {
   main {
-    max-width: 90dvw;
-    padding: 0;
+    grid-template-columns: minmax(0, 5dvw) minmax(0, 90dvw) minmax(0, 5dvw);
     font-size: 1.05rem;
   }
 
@@ -256,6 +266,12 @@ header {
   }
 
   span .date-divider {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  main :deep(.post-index) {
     display: none;
   }
 }

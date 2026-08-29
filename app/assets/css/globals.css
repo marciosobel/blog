@@ -41,7 +41,6 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--main-font);
-  scroll-behavior: smooth;
 
   margin: 0;
 }
