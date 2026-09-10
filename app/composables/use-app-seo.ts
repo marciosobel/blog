@@ -10,13 +10,16 @@ interface SeoOptions {
   tags?: string[] | (() => string[] | undefined);
 }
 
+const BASE_URL = "https://blog.marciosobel.dev";
+
 export default function (options: SeoOptions) {
   const { locale, defaultLocale } = useI18n();
-  const baseUrl = "https://blog.marciosobel.dev";
 
-  const path = locale.value === defaultLocale ? "" : `/${locale.value}`;
   const slugPath = options.slug ? `/${options.slug}` : "";
-  const url = `${baseUrl}${path}${slugPath}`;
+  const url = computed(() => {
+    const localePath = locale.value === defaultLocale ? "" : `/${locale.value}`;
+    return `${BASE_URL}${localePath}${slugPath}`;
+  });
 
   const articleOptions =
     options.type === "article"
@@ -35,34 +38,34 @@ export default function (options: SeoOptions) {
     ogTitle: options.title,
     ogDescription: options.description,
     ogType: options.type || "website",
-    ogUrl: url,
-    ogImage: options.image || `${baseUrl}/og_image.png`,
+    ogUrl: () => url.value,
+    ogImage: options.image || `${BASE_URL}/og_image.png`,
     twitterCard: "summary_large_image",
     robots: options.noindex ? "noindex, nofollow" : "index, follow",
     ...articleOptions,
   });
 
   if (!options.noindex) {
-    useHead({
+    useHead(() => ({
       htmlAttrs: { lang: locale.value },
       link: [
-        { rel: "canonical", href: url },
+        { rel: "canonical", href: url.value },
         {
           rel: "alternate",
           hreflang: "x-default",
-          href: `${baseUrl}${slugPath}`,
+          href: `${BASE_URL}${slugPath}`,
         },
         {
           rel: "alternate",
           hreflang: "en",
-          href: `${baseUrl}${slugPath}`,
+          href: `${BASE_URL}${slugPath}`,
         },
         {
           rel: "alternate",
           hreflang: "pt",
-          href: `${baseUrl}/pt${slugPath}`,
+          href: `${BASE_URL}/pt${slugPath}`,
         },
       ],
-    });
+    }));
   }
 }
