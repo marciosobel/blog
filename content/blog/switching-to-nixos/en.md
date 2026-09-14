@@ -64,7 +64,7 @@ If you enjoy exploring stuff in tech, such as ricing, creating your own configs,
 ### Cons
 Now, I think NixOS is **not** a good option for you if you:
 #### Just want things to work fast
-If you just want to download VSCode and want it to work, or if you only use a browser, or even if you find that setting Neovim by yourself "too much work", then I think NixOS is not for you. Setting up NixOS is tedious and takes time. While you can just copy someone else's file to have a solid starting point, I believe that not making the system suit your own needs is not only a waste of it's potential and will only be a frustating experience if you ever want to change something.
+If you just want to download VSCode and want it to work, or if you only use a browser, or even if you find that setting Neovim by yourself "too much work", then I think NixOS is not for you. Setting up NixOS is tedious and takes time. While you can just copy someone else's file to have a solid starting point, I believe that not making the system suit your own needs will be a waste of it's potential and a frustating experience if you ever want to change something.
 #### Are new to Linux
 If you're new to the Linux world, I think NixOS is too much to take. Go explore Ubuntu, Mint, or even Fedora. Then you can dive down into Arch, Void or NixOS. Get a feeling of how Linux works, how it's built to then be able to see how lower-level systems bends it to get the most out of it.
 ## Conclusion
