@@ -1,30 +1,26 @@
 ---
-import "@/styles/global.css";
-import { languages, getCollection, getEntry, defaultLanguage } from "@/i18n";
-import Seo from "@/components/seo.astro";
 import Post from "@/components/post.astro";
+import { defaultLanguage, getCollection, type Language, languages } from "@/i18n";
+import Base from "@/layouts/base.astro";
 
+// The default language lives at the root, without a prefix.
 export async function getStaticPaths() {
-  const paths = [];
-
-  for (const lang of languages) {
-    const posts = await getCollection(lang);
-    for (const post of posts) {
-      paths.push({
-        params: { slug: post.id, lang },
+  const nonDefault = languages.filter((lang) => lang !== defaultLanguage);
+  const paths = await Promise.all(
+    nonDefault.map(async (lang) =>
+      (await getCollection(lang)).map((post) => ({
+        params: { lang, slug: post.id },
         props: { post },
-      });
-    }
-  }
-  return paths;
+      })),
+    ),
+  );
+  return paths.flat();
 }
 
+const { lang } = Astro.params as { lang: Language };
 const { post } = Astro.props;
 ---
 
-<html lang={defaultLanguage}>
-  <Seo post={post} />
-  <body>
-    <Post post={post} />
-  </body>
-</html>
+<Base lang={lang} post={post}>
+  <Post post={post} />
+</Base>

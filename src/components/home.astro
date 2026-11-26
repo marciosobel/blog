@@ -1,0 +1,17 @@
+---
+import PageFooter from "@/components/page-footer.astro";
+import PageHeader from "@/components/page-header.astro";
+import PostList from "@/components/post-list.astro";
+---
+
+<PageHeader />
+<main>
+  <PostList />
+</main>
+<PageFooter />
+
+<style>
+  main {
+    flex-grow: 1;
+  }
+</style>

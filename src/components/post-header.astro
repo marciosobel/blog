@@ -1,5 +1,5 @@
 ---
-import { useLocale } from "@/i18n";
+import { defaultLanguage, type Language, localizePath, useLocale } from "@/i18n";
 import { formatDate } from "@/utils/format-date";
 
 import ThemeSwitcher from "@/components/theme-switcher.astro";
@@ -7,17 +7,17 @@ import ArrowLeft from "@/components/icons/arrow-left.svg";
 import Calendar from "@/components/icons/calendar.svg";
 import Clock from "@/components/icons/clock.svg";
 
-const { lang } = Astro.params;
+const { lang = defaultLanguage } = Astro.params as { lang?: Language };
 const { post } = Astro.props;
 
 const t = useLocale(lang);
-const homeHref = lang ? `/${lang}` : "/";
+const homeHref = localizePath("/", lang);
 ---
 
 <header>
   <div id="header-buttons" class="flex-center">
     <a id="back-to-all-posts" class="flex-center" href={homeHref}>
-      <ArrowLeft class="icon" />
+      <ArrowLeft class="icon" aria-hidden="true" />
       <span class="underline-link">{t("all-posts")}</span>
     </a>
 
@@ -29,8 +29,8 @@ const homeHref = lang ? `/${lang}` : "/";
 
     <aside id="metadata" class="flex-center">
       <span>
-        <Calendar class="icon" />{t("post-posted-at")}
-        {formatDate(post.data.date)}
+        <Calendar class="icon" aria-hidden="true" />{t("created-in")}
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
       </span>
       {
         post.data.updated && (
@@ -38,9 +38,9 @@ const homeHref = lang ? `/${lang}` : "/";
             <span class="date-divider" aria-hidden>
               &nbsp; ·&nbsp;
             </span>
-            <Clock class="icon" />
-            {t("post-updated-at")}
-            {formatDate(post.data.updated)}
+            <Clock class="icon" aria-hidden="true" />
+            {t("last-updated")}
+            <time datetime={post.data.updated.toISOString()}>{formatDate(post.data.updated, lang)}</time>
           </span>
         )
       }

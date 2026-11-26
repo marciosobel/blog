@@ -1,0 +1,17 @@
+---
+import "@/styles/global.css";
+import type { ComponentProps } from "astro/types";
+import Seo from "@/components/seo.astro";
+import { defaultLanguage } from "@/i18n";
+
+type Props = ComponentProps<typeof Seo>;
+
+const { lang = defaultLanguage } = Astro.props;
+---
+
+<html lang={lang}>
+  <Seo {...Astro.props} />
+  <body>
+    <slot />
+  </body>
+</html>

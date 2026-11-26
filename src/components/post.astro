@@ -1,25 +1,19 @@
 ---
 import { render } from "astro:content";
-import { constants } from "@/constants";
-import { defaultLanguage } from "@/i18n";
-import Seo from "@/components/seo.astro";
-import PostHeader from "@/components/post-header.astro";
 import PageFooter from "@/components/page-footer.astro";
+import PostHeader from "@/components/post-header.astro";
 
-const { post, lang = defaultLanguage } = Astro.props;
-const { title, description, posted: postedAt, updated: updatedAt } = post.data;
+const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<html>
-  <PostHeader post={post} />
+<PostHeader post={post} />
 
-  <main>
-    <Content />
-  </main>
+<main>
+  <Content />
+</main>
 
-  <PageFooter />
-</html>
+<PageFooter />
 
 <style>
   main {
@@ -115,7 +109,7 @@ const { Content } = await render(post);
     main {
       max-width: 90dvw;
       padding: 0;
-      font-size: 2.05rem;
+      font-size: 1.05rem;
     }
   }
 </style>

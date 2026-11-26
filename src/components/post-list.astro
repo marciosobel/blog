@@ -1,31 +1,20 @@
 ---
+import Calendar from "@/components/icons/calendar.svg";
+import Clock from "@/components/icons/clock.svg";
+import Search from "@/components/icons/search.svg";
 import {
   defaultLanguage,
   getCollection,
-  useLocale,
-  languages,
   type Language,
+  localizePath,
+  useLocale,
 } from "@/i18n";
-import { constants } from "@/constants";
 import { formatDate } from "@/utils/format-date";
 
-import Seo from "@/components/seo.astro";
-import Search from "@/components/icons/search.svg";
-import Calendar from "@/components/icons/calendar.svg";
-import Clock from "@/components/icons/clock.svg";
-
-const { lang = defaultLanguage } = Astro.props;
+const { lang = defaultLanguage } = Astro.params as { lang?: Language };
 const t = useLocale(lang);
 
-const posts = (await getCollection(lang)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-
-const generateHref = (uri: string): string => {
-  const isDefaultLanguage = lang === defaultLanguage;
-  const prefix = isDefaultLanguage ? "" : lang;
-  return `${prefix}/${uri}`;
-};
+const posts = await getCollection(lang);
 ---
 
 <div id="search-bar">
@@ -33,21 +22,22 @@ const generateHref = (uri: string): string => {
     id="search-input"
     type="search"
     autocomplete="off"
-    placeholder={t("search-posts")}
+    name="search-posts"
+    placeholder={t("search-posts-placeholder")}
+    aria-label={t("search-posts-label")}
   />
-  <Search />
+  <Search aria-hidden="true" />
 </div>
 
 <ul id="post-list" class="flex-center">
   {
     posts.map((post) => (
       <li
-        data-title={post.data.title.toLowerCase()}
-        data-id={post.id.toLowerCase()}
+        data-search={`${post.data.title} ${post.data.description}`.toLowerCase()}
       >
         <div class="post-header">
           <h2 class="post-title">
-            <a class="underline-link" href={generateHref(post.id)}>
+            <a class="underline-link" href={localizePath(post.id, lang)}>
               {post.data.title}
             </a>
           </h2>
@@ -76,21 +66,19 @@ const generateHref = (uri: string): string => {
 </ul>
 
 <script>
-  const searchInput = document.getElementById("search-input");
-  const listItems = document.querySelectorAll("#post-list li");
+  const searchInput = document.getElementById("search-input") as HTMLInputElement | null;
+  const listItems = document.querySelectorAll<HTMLElement>("#post-list li");
 
-  searchInput?.addEventListener("input", (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    listItems.forEach((item) => {
-      const id = item.getAttribute("data-id");
-      const title = item.getAttribute("data-title");
-      if (title.includes(query) || id.includes(query)) {
-        item.style.display = "";
-      } else {
-        item.style.display = "none";
-      }
-    });
-  });
+  const filter = () => {
+    const query = searchInput?.value.toLowerCase().trim() ?? "";
+    for (const item of listItems) {
+      item.hidden = !item.dataset.search?.includes(query);
+    }
+  };
+
+  searchInput?.addEventListener("input", filter);
+  // The browser may restore the input's value on back/forward navigation.
+  filter();
 </script>
 
 <style>

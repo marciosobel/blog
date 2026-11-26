@@ -50,4 +50,18 @@ const url = generateHref(constants.BASE_URL);
   <meta property="og:image" content={constants.OG_IMAGE_URL} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="robots" content="index, follow" />
+
+  <script is:inline>
+    // Runs before first paint so the saved theme never flashes.
+    (() => {
+      const saved = localStorage.getItem("theme");
+      const theme =
+        saved === "dark" || saved === "light"
+          ? saved
+          : matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+      document.documentElement.classList.toggle("dark", theme === "dark");
+    })();
+  </script>
 </head>

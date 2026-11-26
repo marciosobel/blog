@@ -1,35 +1,18 @@
 ---
-import "@/styles/global.css";
-import { languages, defaultLanguage } from "@/i18n";
+import Home from "@/components/home.astro";
+import { defaultLanguage, type Language, languages } from "@/i18n";
+import Base from "@/layouts/base.astro";
 
-import Header from "@/components/page-header.astro";
-import Footer from "@/components/page-footer.astro";
-import PostList from "@/components/post-list.astro";
-import Seo from "@/components/seo.astro";
-
+// The default language lives at the root, without a prefix.
 export function getStaticPaths() {
-  return languages.map((lang) => ({ params: { lang } }));
+  return languages
+    .filter((lang) => lang !== defaultLanguage)
+    .map((lang) => ({ params: { lang } }));
 }
 
-const { lang } = Astro.params;
-if (lang === defaultLanguage) {
-  return Astro.redirect("/");
-}
+const { lang } = Astro.params as { lang: Language };
 ---
 
-<html lang={lang}>
-  <Seo />
-  <body>
-    <Header />
-    <main>
-      <PostList />
-    </main>
-    <Footer />
-  </body>
-</html>
-
-<style>
-  main {
-    flex-grow: 1;
-  }
-</style>
+<Base lang={lang}>
+  <Home />
+</Base>
