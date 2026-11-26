@@ -2,6 +2,7 @@
 title: "Astro vs. Nuxt: Which one should you use for your blog?"
 description: If you're looking to start a blog, you will probably come across these two very popular options. In this post, I will discuss the pros and cons of each.
 date: 2026-06-17
+updated: 2026-11-26
 tags:
   - astro
   - nuxt
@@ -187,3 +188,8 @@ The difference in the final bundle is certainly notable. Astro delivers a much l
 Nonetheless, Astro definitely won me over with its charm and simplicity. I will certainly use it to generate documentation for possible libraries of mine in the future. I didn't get to explore its full potential and, if I were starting from scratch, I would probably pick a template and build from there.
 
 That was my review of Astro, I hope you had a good read. Until next time!
+
+## Post Scriptum
+I've written this post about 6 months ago; and, only now, I've considered the usage of AI specifically for this part of Astro that is very verbose and a bit unreadable, which rules out the only thing that kept this blog away from using Astro. At that time, I was very strict about AI usage on my own software, now I have a different mind; I want to know where every piece of code is, who wrote it doesn't really matter. My blog still looks the same, feels the same, have my own design on it and I still write the posts word by word.
+
+So, yeah, the blog is now on Astro!
