@@ -1,11 +1,16 @@
-import { defineCollection } from "astro/content/runtime";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { defaultLanguage, type Language } from "@/i18n";
 
+// Posts live at `content/blog/<slug>/<language>.md`, so the entry id is the folder name.
 const defineBlogCollection = (language: Language = defaultLanguage) => {
   return defineCollection({
-    loader: glob({ base: `posts/${language}`, pattern: "**/*.{md,mdx}" }),
+    loader: glob({
+      base: "content/blog",
+      pattern: `*/${language}.md`,
+      generateId: ({ entry }) => entry.split("/")[0],
+    }),
     schema: z.object({
       title: z.string(),
       description: z.string(),
