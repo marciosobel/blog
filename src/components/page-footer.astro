@@ -1,7 +1,13 @@
 ---
 import Earth from "@/components/icons/earth.svg";
 import Github from "@/components/icons/github.svg";
-import { defaultLanguage, type Language, useLocale } from "@/i18n";
+import Rss from "@/components/icons/rss.svg";
+import {
+  defaultLanguage,
+  type Language,
+  localizePath,
+  useLocale,
+} from "@/i18n";
 
 const { lang = defaultLanguage } = Astro.params as { lang?: Language };
 const t = useLocale(lang);
@@ -14,6 +20,10 @@ const t = useLocale(lang);
 
   <a href="https://github.com/marciosobel" aria-label={t("github-label")}>
     <Github class="icon" aria-hidden="true" />
+  </a>
+
+  <a href={localizePath("/feed", lang)} aria-label={t("rss-label")}>
+    <Rss class="icon" aria-hidden="true" />
   </a>
 </footer>
 
