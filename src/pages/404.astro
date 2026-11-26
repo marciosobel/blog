@@ -1,0 +1,53 @@
+---
+import PageHeader from "@/components/page-header.astro";
+import { entries, useLocale } from "@/i18n";
+import Base from "@/layouts/base.astro";
+
+// A static host serves this single file for every missing path, so it's
+// rendered in the default language and switched to Portuguese on /pt/ paths.
+const t = useLocale("en");
+const pt = entries.pt;
+---
+
+<Base title={t("post-not-found")} description={t("not-found-message")} noindex>
+  <PageHeader />
+
+  <main class="not-found">
+    <p data-pt={pt["post-not-found"]}>{t("post-not-found")}</p>
+    <a href="/" class="back" data-pt={pt["back-to-homepage"]} data-pt-href="/pt">
+      {t("back-to-homepage")}
+    </a>
+  </main>
+</Base>
+
+<script is:inline>
+  if (/^\/pt(\/|$)/.test(location.pathname)) {
+    document.documentElement.lang = "pt";
+    for (const element of document.querySelectorAll("[data-pt]")) {
+      element.textContent = element.dataset.pt;
+      if (element.dataset.ptHref) element.href = element.dataset.ptHref;
+    }
+  }
+</script>
+
+<style>
+  main {
+    margin: auto;
+    text-align: center;
+  }
+
+  main p {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .back {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-bg-weak);
+    border-radius: var(--round-base);
+    font-size: 1.1rem;
+  }
+</style>

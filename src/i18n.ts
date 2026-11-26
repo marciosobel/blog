@@ -5,6 +5,9 @@ export const entries = {
     "last-updated": "Last updated in",
     locale: "Locale",
     "post-not-found": "Post not found",
+    "not-found-message":
+      "The post you are looking for does not exist or has been removed.",
+    "back-to-homepage": "Back to homepage",
     "search-posts-placeholder": "Search posts...",
     "search-posts-label": "Search posts",
     "seo-description":
@@ -19,6 +22,9 @@ export const entries = {
     "last-updated": "Última atualização em",
     locale: "Idioma",
     "post-not-found": "Post não encontrado",
+    "not-found-message":
+      "O post que você está procurando não existe ou foi removido.",
+    "back-to-homepage": "Voltar para a página inicial",
     "search-posts-placeholder": "Pesquisar posts...",
     "search-posts-label": "Pesquisar posts",
     "seo-description":
