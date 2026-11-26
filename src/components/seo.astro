@@ -38,6 +38,7 @@ const title = `${pageTitle ?? "Blog"} - Márcio Sobel`;
 const description =
   customDescription ?? post?.data.description ?? t("seo-description");
 const type = post ? "article" : "website";
+const rssUrl = `${constants.BASE_URL}${localizePath("/feed", lang)}`;
 ---
 
 <head>
@@ -49,6 +50,12 @@ const type = post ? "article" : "website";
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" href="/favicon.png" />
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="Márcio Sobel - Blog"
+    href={rssUrl}
+  />
 
   <title>{title}</title>
   <meta name="description" content={description} />

@@ -13,8 +13,10 @@ export const entries = {
     "post-index": "On this page",
     "seo-description":
       "A silly developer who loves cats, art and coding on free time.",
+    "rss-description": "yapping about stuff online",
     "main-website": "Main website",
     "change-theme": "Change theme",
+    "rss-label": "RSS feed",
     "github-label": "Github",
   },
   pt: {
@@ -31,8 +33,10 @@ export const entries = {
     "post-index": "Nesta página",
     "seo-description":
       "Um desenvolvedor que ama gatos, arte e programação no tempo livre.",
+    "rss-description": "falando abobrinhas online",
     "main-website": "Website principal",
     "change-theme": "Alterar tema",
+    "rss-label": "Feed RSS",
     "github-label": "Github",
   },
 };
