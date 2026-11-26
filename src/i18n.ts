@@ -10,6 +10,7 @@ export const entries = {
     "back-to-homepage": "Back to homepage",
     "search-posts-placeholder": "Search posts...",
     "search-posts-label": "Search posts",
+    "post-index": "On this page",
     "seo-description":
       "A silly developer who loves cats, art and coding on free time.",
     "main-website": "Main website",
@@ -27,6 +28,7 @@ export const entries = {
     "back-to-homepage": "Voltar para a página inicial",
     "search-posts-placeholder": "Pesquisar posts...",
     "search-posts-label": "Pesquisar posts",
+    "post-index": "Nesta página",
     "seo-description":
       "Um desenvolvedor que ama gatos, arte e programação no tempo livre.",
     "main-website": "Website principal",
