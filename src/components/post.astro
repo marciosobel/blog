@@ -2,28 +2,42 @@
 import { render } from "astro:content";
 import PageFooter from "@/components/page-footer.astro";
 import PostHeader from "@/components/post-header.astro";
+import PostIndex from "@/components/post-index.astro";
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 ---
 
 <PostHeader post={post} />
 
 <main>
-  <Content />
+  <article class="content">
+    <Content />
+  </article>
+  <PostIndex headings={headings} />
 </main>
 
 <PageFooter />
 
 <style>
   main {
-    padding-inline: 1.875rem;
-    margin-inline: auto;
-    max-width: 75ch;
+    display: grid;
+    grid-template-columns: minmax(30px, 1fr) minmax(0, 75ch) minmax(30px, 1fr);
+    width: 100%;
     line-height: 1.45;
     font-size: 1.125rem;
     overflow-wrap: break-word;
     flex-grow: 1;
+  }
+
+  .content {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  main :global(.post-index) {
+    grid-column: 3;
+    grid-row: 1;
   }
 
   :global(h1),
@@ -107,9 +121,14 @@ const { Content } = await render(post);
 
   @media only screen and (max-width: 800px) {
     main {
-      max-width: 90dvw;
-      padding: 0;
+      grid-template-columns: minmax(0, 5dvw) minmax(0, 90dvw) minmax(0, 5dvw);
       font-size: 1.05rem;
+    }
+  }
+
+  @media only screen and (max-width: 1100px) {
+    main :global(.post-index) {
+      display: none;
     }
   }
 </style>
