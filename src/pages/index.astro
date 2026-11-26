@@ -1,26 +1,8 @@
 ---
-import "@/styles/global.css";
-import { defaultLanguage } from "@/i18n";
-
-import Header from "@/components/page-header.astro";
-import Footer from "@/components/page-footer.astro";
-import PostList from "@/components/post-list.astro";
-import Seo from "@/components/seo.astro";
+import Home from "@/components/home.astro";
+import Base from "@/layouts/base.astro";
 ---
 
-<html lang={defaultLanguage}>
-  <Seo />
-  <body>
-    <Header />
-    <main>
-      <PostList />
-    </main>
-    <Footer />
-  </body>
-</html>
-
-<style>
-  main {
-    flex-grow: 1;
-  }
-</style>
+<Base>
+  <Home />
+</Base>

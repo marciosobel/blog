@@ -1,23 +1,31 @@
 export const entries = {
   en: {
+    "all-posts": "All posts",
+    "created-in": "Created in",
+    "last-updated": "Last updated in",
+    locale: "Locale",
     "post-not-found": "Post not found",
-    "search-posts": "Search posts...",
+    "search-posts-placeholder": "Search posts...",
+    "search-posts-label": "Search posts",
     "seo-description":
       "A silly developer who loves cats, art and coding on free time.",
-    locale: "Locale",
-    "all-posts": "All posts",
-    "post-posted-at": "Posted at",
-    "post-updated-at": "",
+    "main-website": "Main website",
+    "change-theme": "Change theme",
+    "github-label": "Github",
   },
   pt: {
-    "post-not-found": "Post não encontrado",
-    "search-posts": "Procurar posts...",
-    "seo-description":
-      "Um desenvolvedor que ama gatos, arte e programação no tempo livre",
-    locale: "Idioma",
     "all-posts": "Todos os posts",
-    "post-posted-at": "Publicado em",
-    "post-updated-at": "Atualizado em",
+    "created-in": "Criado em",
+    "last-updated": "Última atualização em",
+    locale: "Idioma",
+    "post-not-found": "Post não encontrado",
+    "search-posts-placeholder": "Pesquisar posts...",
+    "search-posts-label": "Pesquisar posts",
+    "seo-description":
+      "Um desenvolvedor que ama gatos, arte e programação no tempo livre.",
+    "main-website": "Website principal",
+    "change-theme": "Alterar tema",
+    "github-label": "Github",
   },
 };
 
@@ -51,8 +59,16 @@ export function useLocale<L extends Language>(
   };
 }
 
-export function getCollection(language: Language = defaultLanguage) {
-  return getContentCollection(`blog-${language}`);
+export async function getCollection(language: Language = defaultLanguage) {
+  const posts = await getContentCollection(`blog-${language}`);
+  return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
+/** Prefixes a path with the language segment (none for the default language). */
+export function localizePath(path: string, language: Language = defaultLanguage) {
+  const prefix = language === defaultLanguage ? "" : `/${language}`;
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  return normalized === "/" ? prefix || "/" : `${prefix}${normalized}`;
 }
 
 export function getEntry(entry: string, language: Language = defaultLanguage) {

@@ -1,25 +1,34 @@
 ---
-import { languages, defaultLanguage, useLocale } from "@/i18n";
 import Languages from "@/components/icons/languages.svg";
+import {
+  defaultLanguage,
+  type Language,
+  languages,
+  localizePath,
+  useLocale,
+} from "@/i18n";
 
-const { lang = defaultLanguage } = Astro.params;
+const { lang = defaultLanguage } = Astro.params as { lang?: Language };
 const t = useLocale(lang);
 
-const currentIndex = languages.indexOf(lang);
-const nextIndex = (currentIndex + 1) % languages.length;
-const nextLanguage =
-  languages[nextIndex] === defaultLanguage ? "" : languages[nextIndex];
+const nextLanguage = languages[(languages.indexOf(lang) + 1) % languages.length];
 ---
 
-<a href={`/${nextLanguage}`}>
-  <button id="locale-switcher">
-    <Languages width="16" height="16" />
-    {t("locale")}: {lang}
-  </button>
+<a class="locale-switcher" href={localizePath("/", nextLanguage)} hreflang={nextLanguage}>
+  <Languages width="16" height="16" aria-hidden="true" />
+  {t("locale")}: {lang}
 </a>
 
 <style>
-  #locale-switcher {
+  /* Same look as the global `button` style. */
+  .locale-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-bg-weak);
+    border-radius: var(--round-base);
     text-wrap: nowrap;
+    font-size: 0.8125rem;
   }
 </style>
